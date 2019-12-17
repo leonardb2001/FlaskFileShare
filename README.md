@@ -44,7 +44,7 @@ Hier eine kleine Hilfe:
 2. `git checkout -b <branch-name>` erstellt einen neuen branch. Bitte wählt einen aussagekräftigen Namen für das "feature", das ihr gerade programmieren wollt (z. B. `user_authentication_backend` oder `file_display_frontend` oder `redux_implementation_frontend`).
 3. Arbeitet an dem Code mit regelmäßigen `git add <path/to/file>` und `git commit`s und aussagekräftigen commit messages. Idealerweise commited man immer, wenn man eine neue Untereinheit (z. B. eine neue Funktion) fertiggeschrieben hat.
 4. `git push origin <branch-name>` lädt eure neuen commits auf github hoch. Das ist wichtig, wenn mehrere zugleich am Branch arbeiten wollen. In diesem Fall am besten nach jedem Commit pushen.
-5. Wenn ihr euren Code einreichen wollt (d. h. in den `master` Branch gemerged sehen wollt), stellt sichter, dass der Code mit dem bestehenden Code funktioniert und dass ihr den Code frisch gepushed habt. Dann geht ihr auf github.com zum Repository und klickt auf "New pull request", wählt den richtigen Branch aus.
+5. Wenn ihr euren Code einreichen wollt (d. h. in den `master` Branch gemerged sehen wollt), stellt sichter, dass der Code mit dem bestehenden Code funktioniert und dass ihr den Code frisch gepushed habt. Dann geht ihr auf github.com zum Repository und klickt auf "New pull request", wählt den richtigen Branch aus und schickt den Pull Request ab.
 6. Es kann sein, dass Kommentare kommen, was ihr noch verändern müsst. Dann führt ihr die entsprechenden Änderungen aus, added, committed und pushed. Ihr müsst keinen neuen Pull Request machen!
 7. Wenn alles super ist, wird euer Branch in den `master` Branch gemerged.
 
