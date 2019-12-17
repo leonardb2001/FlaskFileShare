@@ -1,4 +1,4 @@
-# Dummyserver für das unglaublich wundervolle Python-Projekt
+# Dummyserver
 
 Bisher befindet sich in dieser Repository ein Dummyserver zur individuellen Entwicklung. Der hat nur die absoluten Basics.
 
@@ -15,14 +15,13 @@ Steps:
 Unter Windows:
 `<Name für deiner virtuellen Umgebung>\Scripts\activate`
 
-Unter Linux (ka ob das funktioniert, hab ich so ausm Internet kopiert. Hab kein Linux und konnte es daher nicht ausprobieren):
-
+Unter Linux:
 `source <Name deiner virtuellen Umgebung>/bin/activate`
 
 ### 5. Flask herunterladen:
 `pip install flask`
 
-### 6. Programm schreiben (Ich empfehle das IDLE von Python, kann bei Installation von Python mit zum Runterladen ausgewählt werden. Es geht aber so ziemlich jedes Python IDE)
+### 6. Programm schreiben (Ich empfehle das IDLE von Python, kann bei Installation von Python mit zum Runterladen ausgewählt werden. Es geht aber so ziemlich jede Python IDE.)
 
 ### 7. Mit Flask ausführen:
 Unter Windows:
