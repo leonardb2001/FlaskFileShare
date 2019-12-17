@@ -21,7 +21,7 @@ Unter Linux:
 ### 5. Flask herunterladen:
 `pip install flask`
 
-### 6. Programm schreiben (Ich empfehle das IDLE von Python, kann bei Installation von Python mit zum Runterladen ausgewählt werden. Es geht aber so ziemlich jede Python IDE.)
+### 6. Programm schreiben (Ich empfehle die IDLE von Python, kann bei Installation von Python mit zum Runterladen ausgewählt werden. Es geht aber so ziemlich jede Python IDE.)
 
 ### 7. Mit Flask ausführen:
 Unter Windows:
