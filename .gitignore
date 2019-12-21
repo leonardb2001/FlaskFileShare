@@ -1,1 +1,3 @@
-Programm/Dummyserver/venv
+
+venv/
+__pycache__/
