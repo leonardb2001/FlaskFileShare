@@ -23,6 +23,9 @@ export default function* authToken(payload) {
   } catch (error) {
     yield put({
       type: READ_AUTH_TOKEN_FAILURE,
+      payload: {
+        status: error.status
+      }
     })
   }
 }

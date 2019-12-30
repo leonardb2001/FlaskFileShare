@@ -10,7 +10,8 @@ const initialState = {
   isAuthenticated: false,
   username: null,
   auth_token: null,
-  loading: false
+  loading: false,
+  statusCode: null
 }
 
 export default function authReducer(state = initialState, action) {
@@ -26,7 +27,8 @@ export default function authReducer(state = initialState, action) {
         isAuthenticated: true,
         username: action.payload.username,
         auth_token: action.payload.auth_token,
-        loading: false
+        loading: false,
+        statusCode: action.payload.status
       }
     case READ_AUTH_TOKEN_FAILURE:
       return {
@@ -34,7 +36,8 @@ export default function authReducer(state = initialState, action) {
         isAuthenticated: false,
         username: null,
         auth_token: null,
-        loading: false
+        loading: false,
+        statusCode: action.payload.status
       }
     default:
       return state
