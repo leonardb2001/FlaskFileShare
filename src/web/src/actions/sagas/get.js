@@ -2,7 +2,7 @@
 import { actionTypes } from 'redux-resource'
 import { put, call } from 'redux-saga/effects'
 
-export default function* get (payload) {
+export default function* getSaga (payload) {
   try {
     let response = yield call(payload.getter, payload.args)
     if (response.status === 401 || response.status === 404) {

@@ -12,7 +12,7 @@ export default function* authToken(payload) {
         new Error(),
         { status: response.status }
       );
-    } else if (response.status == 200) {
+    } else if (response.status === 200) {
       yield put({
         type: READ_AUTH_TOKEN_SUCCESS,
         payload: response.payload
