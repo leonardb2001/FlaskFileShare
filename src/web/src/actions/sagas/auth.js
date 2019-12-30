@@ -15,7 +15,10 @@ export default function* authToken(payload) {
     } else if (response.status === 200) {
       yield put({
         type: READ_AUTH_TOKEN_SUCCESS,
-        payload: response.payload
+        payload: {
+          ...response.payload,
+          status: response.status
+        }
       })
     } else {
       alert("Unexpected API status code ")

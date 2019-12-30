@@ -3,7 +3,8 @@
 import {
   READ_AUTH_TOKEN_PENDING,
   READ_AUTH_TOKEN_SUCCESS,
-  READ_AUTH_TOKEN_FAILURE
+  READ_AUTH_TOKEN_FAILURE,
+  LOGOUT
 } from '../../globals/actionTypes'
 
 const initialState = {
@@ -39,6 +40,8 @@ export default function authReducer(state = initialState, action) {
         loading: false,
         statusCode: action.payload.status
       }
+    case LOGOUT:
+      return initialState
     default:
       return state
   }

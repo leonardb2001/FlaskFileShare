@@ -2,9 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { getAuthToken } from '../globals/actionCreators'
+import { getAuthToken, logout } from '../globals/actionCreators'
 
-class Test extends React.Component {
+class AuthenticationExample extends React.Component {
   render() {
     const { auth, dispatch } = this.props
     console.log(auth)
@@ -13,6 +13,9 @@ class Test extends React.Component {
         <button onClick={ () => {
           dispatch(getAuthToken('tommy', 'password123'))
         }}> AuthenticateButten </button>
+        <button onClick={ () => {
+          dispatch(logout())
+        }}> Logout </button>
             
       </>
     )
@@ -26,4 +29,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Test);
+export default connect(mapStateToProps)(AuthenticationExample);
