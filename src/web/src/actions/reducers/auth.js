@@ -1,4 +1,6 @@
 
+import { actionTypes } from 'redux-resource'
+
 import {
   READ_AUTH_TOKEN_PENDING,
   READ_AUTH_TOKEN_SUCCESS,
@@ -40,6 +42,8 @@ export default function authReducer(state = initialState, action) {
         statusCode: action.payload.status
       }
     case LOGOUT:
+      return initialState
+    case actionTypes.DELETE_RESOURCES_SUCCEEDED:
       return initialState
     default:
       return state
