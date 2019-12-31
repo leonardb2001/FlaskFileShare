@@ -8,17 +8,6 @@ Steps:
 
 ### 2. Dieses Repository auf euren Rechner klonen (siehe 1. unten)
 
-<<<<<<< HEAD
-### 3. Darin im Ordner mit der Datei "main.py" virtuelle Umgebung einrichten:  
-`python -m venv <Name für deine virtuelle Umgebung>`
-
-### 4. Virtuelle Umgebung starten:  
-Unter Windows:  
-`<Name für deiner virtuellen Umgebung>\Scripts\activate`
-
-Unter Linux (ka ob das funktioniert, hab ich so ausm Internet kopiert. Hab kein Linux und konnte es daher nicht ausprobieren):  
-`source <Name deiner virtuellen Umgebung>/bin/activate`
-=======
 ### 3. Darin im Ordner "src" virtuelle Umgebung einrichten:
 `python -m venv venv`
 
@@ -28,7 +17,6 @@ Unter Windows:
 
 Unter Linux:
 `source venv/bin/activate`
->>>>>>> a637a221779bea26f47fd77d0b740637190dce18
 
 ### 5. Flask herunterladen:  
 `pip install flask`
