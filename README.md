@@ -4,7 +4,7 @@ Ein Projekt zum Teilen von Dateien, besonders für die Uni.
 ## Projekt Struktur
 - `backend/`: source code für das Flask-Python-Backend
 - `doc/`: Dokumente zum Konzept
-- `frontend`: source code für das React-Backend
+- `frontend/`: source code für das React-Backend
 - `.gitignore`: Auflistung von Dateien und Ordnern, die git ignorieren soll
 
 Schaut auch mal im wiki (5. Tab oben) rein!
