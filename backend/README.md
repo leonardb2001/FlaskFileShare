@@ -1,11 +1,12 @@
 
-# src
+# Backend
+...geschrieben mit Python, Flask (Server für die API), sqlite3 (Datenbank). Bisher befindet sich in diesem Ordner nur ein Dummyserver zum Ausprobieren.
 
-  - `api/`: Flask Server Api (Backend)
-  - `web/`: React Code (Frontend)
-# Server
+## Struktur
+- `api/`: Flask Server Api (Backend)
+- `main.py`: "Entry Point" des Servers
 
-Bisher befindet sich in diesem Ordner ein Dummyserver zum Ausprobieren.
+# Anleitung
 
 1. Python 3 [hier](https://www.python.org/downloads/) herunterladen
 2. In diesem Ordner virtuelle Umgebung einrichten mit `python -m venv venv`
