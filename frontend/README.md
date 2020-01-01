@@ -2,7 +2,7 @@
 # Frontend
 ...geschrieben mit React.
 
-## Strukture
+## Struktur
 - `public/`: statische Dateien für React (uninteressant)
 - `src/`: eigentlicher React source code
 - `.gitignore`: Auflistung von Dateien und Ordnern, die git ignorieren soll
