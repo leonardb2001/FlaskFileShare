@@ -10,8 +10,8 @@
 - `package.json`: Datei mit Metadaten (zu installierende packages, Skripte, Name, Version, nicht anfassen)
 
 ## Anleitung
-1. `node` und `npm` installieren
-Windows: [hier](https://nodejs.org/de/download/) runterladen
+1. `node` und `npm` installieren  
+Windows: [hier](https://nodejs.org/de/download/) runterladen  
 Linux: `sudo apt install nodejs`
 2. `npm install` installiert alle Dependencies.
 3. `npm start` startet den Development Server.
