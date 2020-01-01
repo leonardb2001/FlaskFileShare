@@ -1,9 +1,18 @@
 
-# Web Frontend
+# Frontend
+...geschrieben mit React.
 
-Für die Benutzung muss `npm` und `node` installiert sein: [link](https://nodejs.org/de/download/).
+## Strukture
+- `public/`: statische Dateien für React (uninteressant)
+- `src/`: eigentlicher React source code
+- `.gitignore`: Auflistung von Dateien und Ordnern, die git ignorieren soll
+- `package-lock.json`: automatisch generierte Datei mit dem Dependency-Graph (nicht anfassen)
+- `package.json`: Datei mit Metadaten (zu installierende packages, Skripte, Name, Version, nicht anfassen)
 
-1. Zum `web`-Ordner wechseln.
+## Anleitung
+1. `node` und `npm` installieren
+Windows: [hier](https://nodejs.org/de/download/) runterladen
+Linux: `sudo apt install nodejs`
 2. `npm install` installiert alle Dependencies.
 3. `npm start` startet den Development Server.
 4. Öffnet `localhost:3000` im Browser.
