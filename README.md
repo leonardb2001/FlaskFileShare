@@ -21,4 +21,8 @@ Schaut auch mal ins Wiki (5. Tab oben) rein! Jeder kann eigene Wiki-Seiten zu Ko
 
 Das Ziel ist es, auf dem `master` Branch nur "sauberen", funktionierenden Code zu haben. Das bedeutet: __Niemand arbeitet direkt auf dem `master` Branch!__ Um an dem Code zu arbeiten, wird ein neuer Branch erstellt. Wenn der Code funktionsfähig ist, wird auf Github ein Pull Request gemacht. Das ist eine Art "Antrag" darauf, euren Code mit dem Master zu mergen (zu vereinen).
 
-
+## Branches
+- __`master`__: Branch für funktionierenden Code (nicht anfassen!)
+- `maintenance`: Branch für Änderungen an READMEs, type fixes, ...
+- `database`: Branch von Leonard mit Funktionen zur Datenbank (im Backend)
+- `redux_frontend`: Branch von Oliver mit einem System, um Testdaten (und potenziell Serverdaten) einfach abzurufen und zu verwalten (im Frontend)
