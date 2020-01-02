@@ -1,6 +1,16 @@
 
+const makeResPromise = (data) => () =>
+  new Promise((res, rej) => {
+    setTimeout(() => res(data), 1000)
+  })
 
-export const getUser200 = {
+const makeRejPromise = (data) => () =>
+  new Promise((res, rej) => {
+    setTimeout(() => rej(data), 1000)
+  })
+
+
+export const getUser200 = makeResPromise({
   status: 200,
   resources: [
     {
@@ -24,29 +34,29 @@ export const getUser200 = {
       email: 'frankfrankfrank@t-online.de'
     }
   ]
-}
+})
 
-export const getUser401 = {
+export const getUser401 = makeRejPromise({
   status: 401
-}
+})
 
-export const postUser201 = {
+export const postUser201 = makeResPromise({
   status: 201,
   id: 'e09a7424486e46a0922705e6ea4404fa'
-}
+})
 
-export const postUser403 = {
+export const postUser403 = makeRejPromise({
   status: 403
-}
+})
 
-export const deleteUser204 = {
+export const deleteUser204 = makeResPromise({
   status: 204
-}
+})
 
-export const deleteUser401 = {
+export const deleteUser401 = makeRejPromise({
   status: 401
-}
+})
 
-export const deleteUser404 = {
+export const deleteUser404 = makeRejPromise({
   status: 404
-}
+})
