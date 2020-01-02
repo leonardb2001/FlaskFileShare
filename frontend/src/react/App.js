@@ -5,6 +5,7 @@ import { store } from '../store'
 import AuthenticationExample from './examples/AuthenticationExample'
 import UserSearchExample from './examples/UserSearchExample'
 import RegisterExample from './examples/RegisterExample'
+import DeleteUserExample from './examples/DeleteUserExample'
 
 class App extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class App extends React.Component {
           <AuthenticationExample />
           <UserSearchExample />
           <RegisterExample />
+          <DeleteUserExample />
         </Provider>
       </>
     );
