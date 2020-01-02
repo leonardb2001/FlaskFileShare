@@ -3,29 +3,31 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { actionTypes, getStatus, getResources } from 'redux-resource';
 
-import { getFiles } from '../../actions/services/files'
+import { postFile } from '../../actions/services/files'
 
-const REQUEST_KEY = 'getFiles'
+const REQUEST_KEY = 'postFile'
 
-class GetFilesExample extends React.Component {
+class PostFilesExample extends React.Component {
   render() {
     const { files, status, statusCode, dispatch } = this.props
-    console.log('get files status: ', status)
-    console.log('get files resources: ', files, statusCode)
+    console.log('post file status: ', status, statusCode)
+    console.log('post file resources: ', files)
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
           dispatch({
-            type: actionTypes.READ_RESOURCES_PENDING,
+            type: actionTypes.CREATE_RESOURCES_PENDING,
             resourceType: 'files',
             requestKey: REQUEST_KEY,
-            getter: getFiles,
+            getter: postFile,
             list: 'files',
-            args: {
-              testArgument: 'username'
+            resource: {
+              name: 'Vorlesung3.mp4',
+              path: 'Mitschnitte/',
+              type: 'f'
             }
           })
-        }}>GetFiles</button>
+        }}>PostFile</button>
       </>
     )
   }
@@ -46,4 +48,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(GetFilesExample)
+export default connect(mapStateToProps)(PostFilesExample)

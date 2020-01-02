@@ -6,15 +6,11 @@ export default function* postSaga (payload) {
   try {
     const { getter, resource, args } = payload
     const response = yield call(getter, resource, args)
-    const newResource = {
-      id: response.id,
-      ...resource
-    }
     yield put({
       type: actionTypes.CREATE_RESOURCES_SUCCEEDED,
       resourceType: payload.resourceType,
       requestKey: payload.requestKey,
-      resources: [newResource],
+      resources: response.resources,
       list: payload.list,
       requestProperties: {
         statusCode: response.status

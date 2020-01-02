@@ -42,7 +42,13 @@ export const getUser401 = makeRejPromise({
 
 export const postUser201 = makeResPromise({
   status: 201,
-  id: 'e09a7424486e46a0922705e6ea4404fa'
+  resources: [
+    {
+      id: 'e09a7424486e46a0922705e6ea4404fa',
+      username: 'albert_einstein',
+      email: 'albert@einstein.com'
+    }
+  ]
 })
 
 export const postUser403 = makeRejPromise({
