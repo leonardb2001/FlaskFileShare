@@ -10,7 +10,10 @@ export default function* getSaga (payload) {
       resourceType: payload.resourceType,
       requestKey: payload.requestKey,
       resources: response.resources,
-      list: payload.list
+      list: payload.list,
+      requestProperties: {
+        statusCode: response.status
+      }
     })
   } catch (error) {
     yield put({
@@ -20,7 +23,7 @@ export default function* getSaga (payload) {
       list: payload.list,
       resources: payload.resources,
       requestProperties: {
-        status: error.status
+        statusCode: error.status
       }
     }) 
   }

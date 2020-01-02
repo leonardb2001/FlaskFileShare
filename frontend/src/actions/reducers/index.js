@@ -5,7 +5,7 @@ import { resourceReducer } from 'redux-resource'
 import authReducer from './auth'
 
 const rootReducer = combineReducers({
-  users: resourceReducer('user'),
+  users: resourceReducer('users'),
   files: resourceReducer('files'),
   auth: authReducer
 })

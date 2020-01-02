@@ -7,7 +7,7 @@ import { getAuthToken, logout } from '../globals/actionCreators'
 class AuthenticationExample extends React.Component {
   render() {
     const { auth, dispatch } = this.props
-    console.log(auth)
+    console.log('auth state: ', auth)
     return (
       <>
         <button onClick={ () => {

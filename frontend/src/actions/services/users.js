@@ -1,36 +1,42 @@
 
-import * from '../../testData/users'
+import * as T from '../../testData/users'
 
 // /api/v1/users?search=<name>
-function getUsersSearch(payload) {
+export function getUsersSearch(payload) {
   console.log('getting user: ', payload)
   return new Promise((res, rej) => {
-    setTimeout(() => res(
-      getUser200
-      // getUser401
-    ), 1000)
-  }
+    setTimeout(() => 
+      res(
+        T.getUser200
+      // rej (
+      //   T.getUser401
+      ), 1000)
+  })
 }
 
 // /api/v1/users
-function postUser(payload) {
+export function postUser(payload) {
   console.log('posting user: ', payload)
   return new Promise((res, rej) => {
-    setTimeout(() => res(
-      postUser201
-      // postUser403
+    setTimeout(() =>
+      res(
+        T.postUser201
+      // rej(
+      //   T.postUser403
     ), 1000)
-  }
+  })
 }
 
 // /api/v1/users/<username>
-function deleteUser(payload) {
+export function deleteUser(payload) {
   console.log('deleting user: ', payload)
   return new Promise((res, rej) => {
-    setTimeout(() => res(
-      deleteUser204
-      // deleteUser401
-      // deleteUser404
+    setTimeout(() =>
+      res(
+        T.deleteUser204
+      // rej(
+      //   T.deleteUser401
+      //   T.deleteUser404
     ), 1000)
-  }
+  })
 }

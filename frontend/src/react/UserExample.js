@@ -1,14 +1,31 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
+import { actionTypes, getStatus, getResources } from 'redux-resource';
+
+import { getUsersSearch } from '../actions/services/users'
+
+const getRequestKey = 'exampleUserSearch'
 
 class UserExample extends React.Component {
 
   render() {
-    const { users, dispatch } = this.props
+    const { users, status, statusCode, dispatch } = this.props
+    console.log('user search status: ', status)
+    console.log('user search resources: ', users, statusCode)
     return (
       <>
-        <button onClick={ () => {
+        <button style={{ display: 'block' }} onClick={ () => {
+          dispatch({
+            type: actionTypes.READ_RESOURCES_PENDING,
+            resourceType: 'users',
+            requestKey: getRequestKey,
+            getter: getUsersSearch,
+            list: 'search',
+            args: {
+              testArgument: "hello world"
+            }
+          })
         }}>GetUsers</button>
       </>
     )
@@ -17,9 +34,18 @@ class UserExample extends React.Component {
 }
 
 function mapStateToProps(state) {
+  const users = getResources(state.users, 'search')
+  const status = getStatus(
+    state.users,
+    `requests.${getRequestKey}.status`
+  )
+  const statusCode = (state.users.requests[getRequestKey]
+    || {statusCode: undefined}).statusCode
   return {
-    users: state.users
+    users,
+    status,
+    statusCode
   }
 }
 
-export default UserExample
+export default connect(mapStateToProps)(UserExample)
