@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { actionTypes, getStatus, getResources } from 'redux-resource';
 
-import { getUsersSearch } from '../actions/services/users'
+import { getUsersSearch } from '../../actions/services/users'
 
 const getRequestKey = 'exampleUserSearch'
 

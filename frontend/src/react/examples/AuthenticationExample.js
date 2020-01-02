@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { getAuthToken, logout } from '../globals/actionCreators'
+import { getAuthToken, logout } from '../../globals/actionCreators'
 
 class AuthenticationExample extends React.Component {
   render() {

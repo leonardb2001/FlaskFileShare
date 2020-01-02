@@ -2,8 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { store } from '../store'
-import AuthenticationExample from './AuthenticationExample'
-import UserSearchExample from './UserSearchExample'
+import AuthenticationExample from './examples/AuthenticationExample'
+import UserSearchExample from './examples/UserSearchExample'
 
 class App extends React.Component {
   render() {
