@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 
 import { store } from '../store'
 import AuthenticationExample from './AuthenticationExample'
+import UserExample from './UserExample'
 
 class App extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class App extends React.Component {
       <>
         <Provider store={store}>
           <AuthenticationExample />
+          <UserExample />
         </Provider>
       </>
     );

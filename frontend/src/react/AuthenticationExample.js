@@ -29,4 +29,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(AuthenticationExample);
+export default connect(mapStateToProps)(AuthenticationExample)
