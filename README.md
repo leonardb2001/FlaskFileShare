@@ -7,7 +7,7 @@ Ein Projekt zum Teilen von Dateien, besonders für die Uni.
 - `frontend/`: source code für das React-Backend
 - `.gitignore`: Auflistung von Dateien und Ordnern, die git ignorieren soll
 
-Schaut auch mal ins Wiki (5. Tab oben) rein! Jeder kann eigene Wiki-Seiten zu Konzept, Planung, Dokumentation oder Hinweisen schreiben.
+Schaut auch mal ins Wiki (5. Tab oben) rein! Jeder kann eigene Wiki-Seiten zu Konzept, Planung, Dokumentation oder Hinweisen schreiben oder bestehende Artikel bearbeiten.
 
 ## Arbeit mit git und Github
 
