@@ -11,7 +11,7 @@ class App extends React.Component {
       <>
         <Provider store={store}>
           <AuthenticationExample />
-          <UserExample />
+          <UserSearchExample />
         </Provider>
       </>
     );

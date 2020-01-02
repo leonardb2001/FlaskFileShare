@@ -48,4 +48,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(UserExample)
+export default connect(mapStateToProps)(UserSearchExample)
