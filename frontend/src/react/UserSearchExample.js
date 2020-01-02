@@ -7,7 +7,7 @@ import { getUsersSearch } from '../actions/services/users'
 
 const getRequestKey = 'exampleUserSearch'
 
-class UserExample extends React.Component {
+class UserSearchExample extends React.Component {
 
   render() {
     const { users, status, statusCode, dispatch } = this.props
