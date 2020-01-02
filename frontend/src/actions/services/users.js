@@ -3,7 +3,7 @@ import * as T from '../../testData/users'
 
 // /api/v1/users?search=<name>
 export function getUsersSearch(payload) {
-  console.log('getting user: ', payload)
+  console.log('getting user service: ', payload)
   return new Promise((res, rej) => {
     setTimeout(() => 
       res(
@@ -15,8 +15,8 @@ export function getUsersSearch(payload) {
 }
 
 // /api/v1/users
-export function postUser(payload) {
-  console.log('posting user: ', payload)
+export function postUser(resource, args) {
+  console.log('posting user service: ', resource, args)
   return new Promise((res, rej) => {
     setTimeout(() =>
       res(
@@ -28,8 +28,8 @@ export function postUser(payload) {
 }
 
 // /api/v1/users/<username>
-export function deleteUser(payload) {
-  console.log('deleting user: ', payload)
+export function deleteUser(resource, args) {
+  console.log('delete user service : ', resource, args)
   return new Promise((res, rej) => {
     setTimeout(() =>
       res(

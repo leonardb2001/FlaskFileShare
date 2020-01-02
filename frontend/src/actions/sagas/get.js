@@ -4,7 +4,7 @@ import { put, call } from 'redux-saga/effects'
 
 export default function* getSaga (payload) {
   try {
-    let response = yield call(payload.getter, payload.args)
+    const response = yield call(payload.getter, payload.args)
     yield put({
       type: actionTypes.READ_RESOURCES_SUCCEEDED,
       resourceType: payload.resourceType,
@@ -20,8 +20,6 @@ export default function* getSaga (payload) {
       type: actionTypes.READ_RESOURCES_FAILED,
       resourceType: payload.resourceType,
       requestKey: payload.requestKey,
-      list: payload.list,
-      resources: payload.resources,
       requestProperties: {
         statusCode: error.status
       }
