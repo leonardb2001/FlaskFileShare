@@ -5,10 +5,9 @@ import { actionTypes, getStatus, getResources } from 'redux-resource';
 
 import { getUsersSearch } from '../../actions/services/users'
 
-const getRequestKey = 'exampleUserSearch'
+const REQUEST_KEY = 'exampleUserSearch'
 
 class UserSearchExample extends React.Component {
-
   render() {
     const { users, status, statusCode, dispatch } = this.props
     console.log('user search status: ', status)
@@ -19,7 +18,7 @@ class UserSearchExample extends React.Component {
           dispatch({
             type: actionTypes.READ_RESOURCES_PENDING,
             resourceType: 'users',
-            requestKey: getRequestKey,
+            requestKey: REQUEST_KEY,
             getter: getUsersSearch,
             list: 'search',
             args: {
@@ -30,16 +29,15 @@ class UserSearchExample extends React.Component {
       </>
     )
   }
-
 }
 
 function mapStateToProps(state) {
   const users = getResources(state.users, 'search')
   const status = getStatus(
     state.users,
-    `requests.${getRequestKey}.status`
+    `requests.${REQUEST_KEY}.status`
   )
-  const statusCode = (state.users.requests[getRequestKey]
+  const statusCode = (state.users.requests[REQUEST_KEY]
     || {statusCode: undefined}).statusCode
   return {
     users,

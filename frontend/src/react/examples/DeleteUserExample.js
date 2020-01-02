@@ -5,10 +5,9 @@ import { actionTypes, getStatus, getResources } from 'redux-resource';
 
 import { deleteUser } from '../../actions/services/users'
 
-const removeUser = 'removeUser'
+const REQUEST_KEY = 'removeUser'
 
 class RegisterExample extends React.Component {
-
   render() {
     const { users, status, statusCode, dispatch } = this.props
     console.log('delete user status: ', status)
@@ -19,7 +18,7 @@ class RegisterExample extends React.Component {
           dispatch({
             type: actionTypes.DELETE_RESOURCES_PENDING,
             resourceType: 'users',
-            requestKey: removeUser,
+            requestKey: REQUEST_KEY,
             getter: deleteUser,
             list: 'search',
             resource: '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
@@ -31,16 +30,15 @@ class RegisterExample extends React.Component {
       </>
     )
   }
-
 }
 
 function mapStateToProps(state) {
   const users = getResources(state.users, 'search')
   const status = getStatus(
     state.users,
-    `requests.${removeUser}.status`
+    `requests.${REQUEST_KEY}.status`
   )
-  const statusCode = (state.users.requests[removeUser]
+  const statusCode = (state.users.requests[REQUEST_KEY]
     || {statusCode: undefined}).statusCode
   return {
     users,

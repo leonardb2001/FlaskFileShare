@@ -5,10 +5,9 @@ import { actionTypes, getStatus, getResources } from 'redux-resource';
 
 import { postUser } from '../../actions/services/users'
 
-const registerUser = 'registerUser'
+const REQUEST_KEY = 'registerUser'
 
 class RegisterExample extends React.Component {
-
   render() {
     const { users, status, statusCode, dispatch } = this.props
     console.log('register status: ', status)
@@ -19,7 +18,7 @@ class RegisterExample extends React.Component {
           dispatch({
             type: actionTypes.CREATE_RESOURCES_PENDING,
             resourceType: 'users',
-            requestKey: registerUser,
+            requestKey: REQUEST_KEY,
             getter: postUser,
             list: 'search',
             resource: {
@@ -34,16 +33,15 @@ class RegisterExample extends React.Component {
       </>
     )
   }
-
 }
 
 function mapStateToProps(state) {
   const users = getResources(state.users, 'search')
   const status = getStatus(
     state.users,
-    `requests.${registerUser}.status`
+    `requests.${REQUEST_KEY}.status`
   )
-  const statusCode = (state.users.requests[registerUser]
+  const statusCode = (state.users.requests[REQUEST_KEY]
     || {statusCode: undefined}).statusCode
   return {
     users,

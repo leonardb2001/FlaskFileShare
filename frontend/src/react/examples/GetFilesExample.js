@@ -5,10 +5,9 @@ import { actionTypes, getStatus, getResources } from 'redux-resource';
 
 import { getFiles } from '../../actions/services/files'
 
-const getFilesRequestKey = 'getFiles'
+const REQUEST_KEY = 'getFiles'
 
 class UserSearchExample extends React.Component {
-
   render() {
     const { files, status, statusCode, dispatch } = this.props
     console.log('get files status: ', status)
@@ -19,7 +18,7 @@ class UserSearchExample extends React.Component {
           dispatch({
             type: actionTypes.READ_RESOURCES_PENDING,
             resourceType: 'files',
-            requestKey: getFilesRequestKey,
+            requestKey: REQUEST_KEY,
             getter: getFiles,
             list: 'files',
             args: {
@@ -36,9 +35,9 @@ function mapStateToProps(state) {
   const files = getResources(state.files, 'files')
   const status = getStatus(
     state.files,
-    `requests.${getFilesRequestKey}.status`
+    `requests.${REQUEST_KEY}.status`
   )
-  const statusCode = (state.files.requests[getFilesRequestKey]
+  const statusCode = (state.files.requests[REQUEST_KEY]
     || {statusCode: undefined}).statusCode
   return {
     files,
