@@ -7,7 +7,7 @@ import { deleteUser } from '../../actions/services/users'
 
 const REQUEST_KEY = 'removeUser'
 
-class RegisterExample extends React.Component {
+class DeleteUserExample extends React.Component {
   render() {
     const { users, status, statusCode, dispatch } = this.props
     console.log('delete user status: ', status)
@@ -47,4 +47,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(RegisterExample)
+export default connect(mapStateToProps)(DeleteUserExample)
