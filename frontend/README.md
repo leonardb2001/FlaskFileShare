@@ -12,7 +12,7 @@
 ## Anleitung
 1. `node` und `npm` installieren  
 Windows: [hier](https://nodejs.org/de/download/) runterladen  
-Linux: `sudo apt install nodejs`
+Ubuntu/Debian: `sudo apt install nodejs`
 2. `npm install` installiert alle Dependencies.
 3. `npm start` startet den Development Server.
 4. Öffnet `localhost:3000` im Browser.
