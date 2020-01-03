@@ -12,3 +12,4 @@ export const getAuthToken = (username, password) => ({
 export const logout = () => ({
   type: LOGOUT
 })
+

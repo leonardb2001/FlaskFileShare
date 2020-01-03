@@ -3,8 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { actionTypes, getStatus, getResources } from 'redux-resource';
 
-import { postFile } from '../../actions/services/files'
-
 const REQUEST_KEY = 'postFile'
 
 class PostFilesExample extends React.Component {

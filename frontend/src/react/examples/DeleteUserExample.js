@@ -3,8 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { actionTypes, getStatus, getResources } from 'redux-resource';
 
-import { deleteUser } from '../../actions/services/users'
-
 const REQUEST_KEY = 'removeUser'
 
 class DeleteUserExample extends React.Component {

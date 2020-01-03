@@ -44,12 +44,12 @@ export const getFiles200 = makeResPromise({
   ]
 })
 
-export const getFiles404 = makeRejPromise({
-  status: 404
-})
-
 export const getFiles401 = makeRejPromise({
   status: 401
+})
+
+export const getFiles404 = makeRejPromise({
+  status: 404
 })
 
 export const postFile201 = makeResPromise({
