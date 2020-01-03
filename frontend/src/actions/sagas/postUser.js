@@ -5,8 +5,8 @@ import { put, call } from 'redux-saga/effects'
 import { postUser201, postUser403 } from '../../testData/users'
 
 export default function* postUser(request) {
+  const { username, email, password } = request.args
   try {
-    const { username, email, password } = request.args
     const res = yield call(postUser201)
     yield put({
       type: actionTypes.CREATE_RESOURCES_SUCCEEDED,

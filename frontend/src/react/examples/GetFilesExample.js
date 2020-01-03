@@ -13,16 +13,6 @@ class GetFilesExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
-          dispatch({
-            type: actionTypes.READ_RESOURCES_PENDING,
-            resourceType: 'files',
-            requestKey: REQUEST_KEY,
-            getter: getFiles,
-            list: 'files',
-            args: {
-              testArgument: 'username'
-            }
-          })
         }}>GetFiles</button>
       </>
     )

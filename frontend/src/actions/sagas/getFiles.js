@@ -5,6 +5,7 @@ import { put, call } from 'redux-saga/effects'
 import { getFiles200, getFiles401, getFiles404 } from '../../testData/files'
 
 export default function* getFiles(request) {
+  const { userid, authToken } = request.args
   try {
     const res = yield call(getFiles200)
     yield put({

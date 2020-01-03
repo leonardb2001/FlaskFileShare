@@ -13,20 +13,6 @@ class RegisterExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
-          dispatch({
-            type: actionTypes.CREATE_RESOURCES_PENDING,
-            resourceType: 'users',
-            requestKey: REQUEST_KEY,
-            getter: postUser,
-            list: 'search',
-            resource: {
-              username: 'albert_einstein',
-              email: 'albert@einstein.com'
-            },
-            args: {
-              password: 'e=mc^2forever'
-            }
-          })
         }}>Register</button>
       </>
     )

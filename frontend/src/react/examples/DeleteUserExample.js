@@ -13,17 +13,6 @@ class DeleteUserExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
-          dispatch({
-            type: actionTypes.DELETE_RESOURCES_PENDING,
-            resourceType: 'users',
-            requestKey: REQUEST_KEY,
-            getter: deleteUser,
-            list: 'search',
-            resource: '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
-            args: {
-              password: 'password123'
-            }
-          })
         }}>DeleteUser</button>
       </>
     )

@@ -5,7 +5,8 @@ import { put, call } from 'redux-saga/effects'
 import { getUser200, getUser401 } from '../../testData/users'
 
 
-export default function* getUserSaga(request) {
+export default function* getUser(request) {
+  const { username, authToken } = request.args
   try {
     const res = yield call(getUser200)
     yield put({

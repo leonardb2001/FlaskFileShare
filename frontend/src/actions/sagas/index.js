@@ -33,7 +33,7 @@ export default function* rootSaga() {
   yield takeEvery((request) => (
     request.type === actionTypes.CREATE_RESOURCES_PENDING
     && request.resourceType === 'files'
-  ), postFiles)
+  ), postFile)
 
   yield takeEvery((request) => (
     request.type === actionTypes.DELETE_RESOURCES_PENDING
@@ -45,9 +45,3 @@ export default function* rootSaga() {
     && request.resourceType === 'files'
   ), deleteFile)
 }
-
-
-function* helpSaga(request) {
-  
-}
-

@@ -5,8 +5,8 @@ import { put, call } from 'redux-saga/effects'
 import { deleteUser204, deleteUser401, deleteUser404 } from '../../testData/users'
 
 export default function* deleteUser(request) {
+  const { userid, authToken } = request.args
   try {
-    const { id } = request.args
     const res = yield call(deleteUser204)
     yield put({
       type: actionTypes.DELETE_RESOURCES_SUCCEEDED,

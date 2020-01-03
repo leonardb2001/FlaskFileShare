@@ -13,18 +13,6 @@ class PostFilesExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
-          dispatch({
-            type: actionTypes.CREATE_RESOURCES_PENDING,
-            resourceType: 'files',
-            requestKey: REQUEST_KEY,
-            getter: postFile,
-            list: 'files',
-            resource: {
-              name: 'Vorlesung3.mp4',
-              path: 'Mitschnitte/',
-              type: 'f'
-            }
-          })
         }}>PostFile</button>
       </>
     )

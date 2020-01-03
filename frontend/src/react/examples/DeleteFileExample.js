@@ -13,14 +13,6 @@ class DeleteFileExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
-          dispatch({
-            type: actionTypes.DELETE_RESOURCES_PENDING,
-            resourceType: 'files',
-            requestKey: REQUEST_KEY,
-            getter: deleteFile,
-            list: 'files',
-            resource: ''                                         // ??
-          })
         }}>DeleteUser</button>
       </>
     )

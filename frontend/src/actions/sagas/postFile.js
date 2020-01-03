@@ -5,6 +5,7 @@ import { put, call } from 'redux-saga/effects'
 import { postFile201, postFile401, postFile404 } from '../../testData/files'
 
 export default function* postFile(request) {
+  const { filename, path, type, userid, authToken } = request.args
   try {
     const res = yield call(postFile201)
     yield put({

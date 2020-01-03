@@ -13,16 +13,6 @@ class UserSearchExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
-          dispatch({
-            type: actionTypes.READ_RESOURCES_PENDING,
-            resourceType: 'users',
-            requestKey: REQUEST_KEY,
-            getter: getUsersSearch,
-            list: 'search',
-            args: {
-              testArgument: "hello world"
-            }
-          })
         }}>GetUsers</button>
       </>
     )
