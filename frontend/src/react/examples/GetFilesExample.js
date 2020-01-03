@@ -1,7 +1,9 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { actionTypes, getStatus, getResources } from 'redux-resource';
+import { getStatus, getResources } from 'redux-resource';
+
+import { getFiles } from '../../globals/actionCreators'
 
 const REQUEST_KEY = 'getFiles'
 
@@ -13,6 +15,12 @@ class GetFilesExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
+          dispatch(getFiles(
+            REQUEST_KEY,
+            'filesOfTommy',
+            '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
+            '<authToken>'
+          ))
         }}>GetFiles</button>
       </>
     )

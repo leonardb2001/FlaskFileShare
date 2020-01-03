@@ -1,7 +1,9 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { actionTypes, getStatus, getResources } from 'redux-resource';
+import { getStatus, getResources } from 'redux-resource';
+
+import { getUsers } from '../../globals/actionCreators'
 
 const REQUEST_KEY = 'exampleUserSearch'
 
@@ -13,6 +15,12 @@ class UserSearchExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
+          dispatch(getUsers(
+            REQUEST_KEY,
+            'userSearch',
+            'tommy',
+            '<authToken>'
+          ))
         }}>GetUsers</button>
       </>
     )

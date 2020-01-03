@@ -1,11 +1,13 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { actionTypes, getStatus, getResources } from 'redux-resource';
+import { getStatus, getResources } from 'redux-resource';
+
+import { postFile } from '../../globals/actionCreators'
 
 const REQUEST_KEY = 'postFile'
 
-class PostFilesExample extends React.Component {
+class PostFileExample extends React.Component {
   render() {
     const { files, status, statusCode, dispatch } = this.props
     console.log('post file status: ', status, statusCode)
@@ -13,6 +15,15 @@ class PostFilesExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
+          dispatch(postFile(
+            REQUEST_KEY,
+            'filesOfTommy',
+            'Vorlesung3.mp4',
+            'Mitschnitte/',
+            'f',
+            '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
+            '<authToken>'
+          ))
         }}>PostFile</button>
       </>
     )
@@ -34,4 +45,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(PostFilesExample)
+export default connect(mapStateToProps)(PostFileExample)

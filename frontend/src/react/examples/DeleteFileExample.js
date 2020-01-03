@@ -1,7 +1,9 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { actionTypes, getStatus, getResources } from 'redux-resource';
+import { getStatus, getResources } from 'redux-resource';
+
+import { deleteFile } from '../../globals/actionCreators'
 
 const REQUEST_KEY = 'deleteFile'
 
@@ -13,6 +15,11 @@ class DeleteFileExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
+          dispatch(deleteFile(
+            REQUEST_KEY,
+            'n9an3l2kd8sna92n',
+            '<authToken>'
+          ))
         }}>DeleteUser</button>
       </>
     )

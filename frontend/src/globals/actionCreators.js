@@ -15,7 +15,7 @@ export const logout = () => ({
   type: LOGOUT
 })
 
-export function getUser(requestKey, list, username, authToken) {
+export function getUsers(requestKey, list, username, authToken) {
   return {
     type: actionTypes.READ_RESOURCES_PENDING,
     resourceType: 'users',
@@ -83,7 +83,7 @@ export function postFile(requestKey, list, filename, path, type, userid, authTok
   }
 }
 
-export function postFile(requestKey, fileid, authToken) {
+export function deleteFile(requestKey, fileid, authToken) {
   return {
     type: actionTypes.READ_RESOURCES_PENDING,
     resourceType: 'users',

@@ -1,9 +1,11 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { actionTypes, getStatus, getResources } from 'redux-resource';
+import { getStatus, getResources } from 'redux-resource';
 
-const REQUEST_KEY = 'removeUser'
+import { deleteUser } from '../../globals/actionCreators'
+
+const REQUEST_KEY = 'deleteUser'
 
 class DeleteUserExample extends React.Component {
   render() {
@@ -13,6 +15,11 @@ class DeleteUserExample extends React.Component {
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
+          dispatch(deleteUser(
+            REQUEST_KEY,
+            '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
+            '<authToken>'
+          ))
         }}>DeleteUser</button>
       </>
     )

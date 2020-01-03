@@ -14,32 +14,32 @@ export const getFiles200 = makeResPromise({
   status: 200,
   resources: [
     {
-        id: "8wb302bsn28lsi20",
-        name: "Hinweise.pdf",
-        path: "",
-        type: "f"
+        id: '8wb302bsn28lsi20',
+        name: 'Hinweise.pdf',
+        path: '',
+        type: 'f'
     },
     {
-        id: "n9an3l2kd8sna92n",
-        name: "Mitschnitte",
-        path: "",
-        type: "d",
+        id: 'n9an3l2kd8sna92n',
+        name: 'Mitschnitte',
+        path: '',
+        type: 'd',
         children: [
-            "9aw211j9abbslwei",
-            "0anvhd73g1dssu50"
+            '9aw211j9abbslwei',
+            '0anvhd73g1dssu50'
         ]
     },
     {
-        id: "9aw211j9abbslwei",
-        name: "Vorlesung1.mp4",
-        path: "Mitschnitte/",
-        type: "f"
+        id: '9aw211j9abbslwei',
+        name: 'Vorlesung1.mp4',
+        path: 'Mitschnitte/',
+        type: 'f'
     },
     {
-        id: "0anvhd73g1dssu50",
-        name: "Vorlesung2.mp4",
-        path: "Mitschnitte/",
-        type: "f"
+        id: '0anvhd73g1dssu50',
+        name: 'Vorlesung2.mp4',
+        path: 'Mitschnitte/',
+        type: 'f'
     }
   ]
 })
@@ -56,17 +56,17 @@ export const postFile201 = makeResPromise({
   status: 201,
   resources: [
     {
-      id: "nao209sn3nnvndk3",
-      name: "Vorlesung3.mp4",
-      path: "Mitschnitte/",
-      type: "f"
+      id: 'nao209sn3nnvndk3',
+      name: 'Vorlesung3.mp4',
+      path: 'Mitschnitte/',
+      type: 'f'
     },
     {
-      id: "n9an3l2kd8sna92n",
+      id: 'n9an3l2kd8sna92n',
       children: [
-        "9aw211j9abbslwei",
-        "0anvhd73g1dssu50",
-        "nao209sn3nnvndk3"
+        '9aw211j9abbslwei',
+        '0anvhd73g1dssu50',
+        'nao209sn3nnvndk3'
       ]
     }
   ]
