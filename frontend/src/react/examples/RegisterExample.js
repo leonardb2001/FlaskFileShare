@@ -10,8 +10,7 @@ const REQUEST_KEY = 'registerUser'
 class RegisterExample extends React.Component {
   render() {
     const { users, status, statusCode, dispatch } = this.props
-    console.log('register status: ', status)
-    console.log('register resources: ', users, statusCode)
+    console.log('register: ', users, status, statusCode)
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
@@ -29,7 +28,7 @@ class RegisterExample extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const users = getResources(state.users, 'search')
+  const users = getResources(state.users, 'userSearch')
   const status = getStatus(
     state.users,
     `requests.${REQUEST_KEY}.status`

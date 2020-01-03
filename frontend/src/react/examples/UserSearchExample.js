@@ -10,8 +10,7 @@ const REQUEST_KEY = 'exampleUserSearch'
 class UserSearchExample extends React.Component {
   render() {
     const { users, status, statusCode, dispatch } = this.props
-    console.log('user search status: ', status)
-    console.log('user search resources: ', users, statusCode)
+    console.log('user search: ', users, status, statusCode)
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
@@ -28,7 +27,7 @@ class UserSearchExample extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const users = getResources(state.users, 'search')
+  const users = getResources(state.users, 'userSearch')
   const status = getStatus(
     state.users,
     `requests.${REQUEST_KEY}.status`

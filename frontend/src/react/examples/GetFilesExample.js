@@ -10,8 +10,7 @@ const REQUEST_KEY = 'getFiles'
 class GetFilesExample extends React.Component {
   render() {
     const { files, status, statusCode, dispatch } = this.props
-    console.log('get files status: ', status)
-    console.log('get files resources: ', files, statusCode)
+    console.log('get files: ', files, status, statusCode)
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
@@ -28,7 +27,7 @@ class GetFilesExample extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const files = getResources(state.files, 'files')
+  const files = getResources(state.files, 'filesOfTommy')
   const status = getStatus(
     state.files,
     `requests.${REQUEST_KEY}.status`

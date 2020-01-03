@@ -10,8 +10,7 @@ const REQUEST_KEY = 'deleteUser'
 class DeleteUserExample extends React.Component {
   render() {
     const { users, status, statusCode, dispatch } = this.props
-    console.log('delete user status: ', status)
-    console.log('delete user resources: ', users, statusCode)
+    console.log('delete user: ', users, status, statusCode)
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
@@ -27,7 +26,7 @@ class DeleteUserExample extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const users = getResources(state.users, 'search')
+  const users = getResources(state.users, 'userSearch')
   const status = getStatus(
     state.users,
     `requests.${REQUEST_KEY}.status`

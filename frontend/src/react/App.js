@@ -8,6 +8,7 @@ import RegisterExample from './examples/RegisterExample'
 import DeleteUserExample from './examples/DeleteUserExample'
 import GetFilesExample from './examples/GetFilesExample'
 import PostFileExample from './examples/PostFileExample'
+import DeleteFileExample from './examples/DeleteFileExample'
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
           <DeleteUserExample />
           <GetFilesExample />
           <PostFileExample />
+          <DeleteFileExample />
         </Provider>
       </>
     );

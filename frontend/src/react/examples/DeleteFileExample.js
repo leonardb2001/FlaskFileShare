@@ -10,8 +10,7 @@ const REQUEST_KEY = 'deleteFile'
 class DeleteFileExample extends React.Component {
   render() {
     const { files, status, statusCode, dispatch } = this.props
-    console.log('delete user status: ', status, statusCode)
-    console.log('delete user resources: ', files)
+    console.log('delete user: ', files, status, statusCode)
     return (
       <>
         <button style={{ display: 'block' }} onClick={ () => {
@@ -20,14 +19,14 @@ class DeleteFileExample extends React.Component {
             'n9an3l2kd8sna92n',
             '<authToken>'
           ))
-        }}>DeleteUser</button>
+        }}>DeleteFile</button>
       </>
     )
   }
 }
 
 function mapStateToProps(state) {
-  const files = getResources(state.files, 'files')
+  const files = getResources(state.files, 'filesOfTommy')
   const status = getStatus(
     state.files,
     `requests.${REQUEST_KEY}.status`
