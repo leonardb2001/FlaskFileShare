@@ -10,7 +10,7 @@ class AuthenticationExample extends React.Component {
     console.log('auth state: ', auth)
     return (
       <>
-        <button onClick={ () => {
+        <button style={{display: 'block'}} onClick={ () => {
           dispatch(getAuthToken('tommy', 'password123'))
         }}> AuthenticateButten </button>
         <button onClick={ () => {

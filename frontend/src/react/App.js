@@ -15,6 +15,7 @@ class App extends React.Component {
     return (
       <>
         <Provider store={store}>
+          <i>Öffne das Developer-Menü (Chrome und Firefox: Shift-Strg-i), um Console-Logs zu sehen!</i>
           <AuthenticationExample />
           <UserSearchExample />
           <RegisterExample />

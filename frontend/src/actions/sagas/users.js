@@ -65,6 +65,12 @@ export function* postUser(request) {
   }
 }
 
+
+/**
+ * deleteUser:
+ * - for all files of the user DELETE_RESOURCES synchronously
+ * (- delete the file list of that user)
+ */
 export function* deleteUser(request) {
   // const { userid, authToken } = request.args
   const userid = request.args.userid

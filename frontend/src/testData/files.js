@@ -54,22 +54,12 @@ export const getFiles404 = makeRejPromise({
 
 export const postFile201 = makeResPromise({
   status: 201,
-  resources: [
-    {
-      id: 'nao209sn3nnvndk3',
-      name: 'Vorlesung3.mp4',
-      path: 'Mitschnitte/',
-      type: 'f'
-    },
-    {
-      id: 'n9an3l2kd8sna92n',
-      children: [
-        '9aw211j9abbslwei',
-        '0anvhd73g1dssu50',
-        'nao209sn3nnvndk3'
-      ]
-    }
-  ]
+  resource: {
+    id: 'nao209sn3nnvndk3',
+    name: 'Vorlesung3.mp4',
+    path: 'Mitschnitte/',
+    type: 'f'
+  } 
 })
 
 export const postFile404 = makeRejPromise({

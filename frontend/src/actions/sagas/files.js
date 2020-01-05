@@ -1,6 +1,6 @@
 
 import { actionTypes } from 'redux-resource'
-import { put, call } from 'redux-saga/effects'
+import { put, call, select } from 'redux-saga/effects'
 
 import {
   getFiles200,
@@ -14,10 +14,30 @@ import {
 //  deleteFile404
 } from '../../testData/files'
 
+function getFileId(userid, fileid) {
+  return `${userid}.${fileid}`
+}
+
+/**
+ * getFiles:
+ * - create unique file ids with '<userid>.<fileid>'
+ * - for every folder, create a list with its children
+ * - create a list for the user with his/her fileids
+ */
 export function* getFiles(request) {
   // const { userid, authToken } = request.args
+  const userid = request.args.userid
   try {
     const res = yield call(getFiles200)
+    let fileChildrenLists = {}
+    for (const resource of res.resources) {
+      resource.id = getFileId(userid, resource.id)
+      if (resource.type == 'd') {
+        fileChildrenLists[resource.id] = resource.children
+        delete resource.children
+      }
+    }
+    const userFileIds = res.resources.map(f => f.id)
     yield put({
       type: actionTypes.READ_RESOURCES_SUCCEEDED,
       resourceType: 'files',
@@ -26,6 +46,15 @@ export function* getFiles(request) {
       list: request.list,
       requestProperties: {
         statusCode: res.status
+      }
+    })
+    yield put({
+      type: actionTypes.UPDATE_RESOURCES,
+      lists: {
+        files: {
+          ...fileChildrenLists,
+          [userid]: userFileIds
+        }
       }
     })
   } catch (err) {
@@ -40,18 +69,42 @@ export function* getFiles(request) {
   }
 }
 
+/**
+ * postFile:
+ * - generate the new unique fileid
+ * - if inside a folder, add the fileid to the list of its children
+ * - add the fileid to the list of the files of the user
+ */
 export function* postFile(request) {
-  // const { filename, path, type, userid, authToken } = request.args
+  // const { filename, path, type, userid, parentid, authToken } = request.args
+  //                                       ========= new
+  const { userid, parentid } = request.args
   try {
     const res = yield call(postFile201)
+    res.resource.id = getFileId(userid, res.resource.id)
     yield put({
       type: actionTypes.CREATE_RESOURCES_SUCCEEDED,
       resourceType: 'files',
       requestKey: request.requestKey,
-      resources: res.resources,
+      resources: [res.resource],
       list: request.list,
       requestProperties: {
         statusCode: res.status
+      }
+    })
+    const lists = {}
+    if (parentid) {
+      const parentChildren = yield select(state => 
+        state.files.lists[parentid])
+      lists[parentid] = parentChildren.concat([res.resource.id])
+    }
+    const userFiles = yield select(state =>
+      state.files.lists[userid] || [])
+    lists[userid] = userFiles.concat([res.resource.id])
+    yield put({
+      type: actionTypes.UPDATE_RESOURCES,
+      lists: {
+        files: lists
       }
     })
   } catch (err) {
@@ -66,8 +119,13 @@ export function* postFile(request) {
   }
 }
 
+/**
+ * deleteFile:
+ * - if it is a folder, for all its children, dispatch a DELETE_RESOURCES action
+ * (- delete the list with its children)
+ */
 export function* deleteFile(request) {
-  // const { fileid, authToken } = request.args
+  // const { fileid, userid, authToken } = request.args
   const fileid = request.args.fileid
   try {
     const res = yield call(deleteFile204)
