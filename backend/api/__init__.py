@@ -1,9 +1,7 @@
 from flask import Flask
 from api import dbinit
 
-dbinit.createDB()
-
-print("Init fuehrt aus")
+dbinit.dataBase().createDB()
 
 app = Flask(__name__)
 
