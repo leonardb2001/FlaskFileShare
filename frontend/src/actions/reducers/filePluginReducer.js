@@ -1,7 +1,7 @@
 
 import { EXTEND_FILE_LIST } from '../../globals/actionTypes'
 
-export default function filePluginReducer(state, action) {
+const filePlugin = (resourceType, options) => (state, action) => {
   switch(action.type) {
     case EXTEND_FILE_LIST:
       const { listkey, files } = action.payload
@@ -18,3 +18,5 @@ export default function filePluginReducer(state, action) {
       return state
   }
 }
+
+export default filePlugin
