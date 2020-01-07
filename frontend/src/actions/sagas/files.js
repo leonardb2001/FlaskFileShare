@@ -1,5 +1,5 @@
 
-import { actionTypes } from 'redux-resource'
+import { actionTypes, getResources } from 'redux-resource'
 import { put, call, select } from 'redux-saga/effects'
 
 import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
@@ -30,24 +30,26 @@ export function* getFiles(request) {
   // const { userid, authToken } = request.args
   const userid = request.args.userid
   try {
-    const res = yield call(getFiles200)
+    const response = yield call(getFiles200)
+    const resources = response.resources
     let fileChildrenLists = {}
-    for (const resource of res.resources) {
+    for (const resource of resources) {
       resource.id = getFileId(userid, resource.id)
       if (resource.type === 'd') {
-        fileChildrenLists[resource.id] = resource.children
+        fileChildrenLists[resource.id] = resource.children.map(id =>
+          getFileId(userid, id))
         delete resource.children
       }
     }
-    const userFileIds = res.resources.map(f => f.id)
+    const userFileIds = resources.map(f => f.id)
     yield put({
       type: actionTypes.READ_RESOURCES_SUCCEEDED,
       resourceType: 'files',
       requestKey: request.requestKey,
-      resources: res.resources,
+      resources: resources,
       list: request.list,
       requestProperties: {
-        statusCode: res.status
+        statusCode: response.status
       }
     })
     yield put({
@@ -78,7 +80,8 @@ export function* getFiles(request) {
  * - add the fileid to the list of the files of the user
  */
 export function* postFile(request) {
-  const { filename, path, type, parentid, authToken } = request.args
+  // const { filename, path, type, parentid, authToken } = request.args
+  const { filename, path, type, parentid } = request.args
   const userid = parentid.split('.')[0]
   try {
     const res = yield call(postFile201)
@@ -150,7 +153,7 @@ export function* deleteFile(request) {
     yield put({
       type: DELETE_FOLDER_RECURSIVELY,
       payload: {
-        listkey: fileid
+        id: fileid
       }
     })
   } catch (err) {
@@ -167,8 +170,27 @@ export function* deleteFile(request) {
 
 
 export function* deleteFolderRecursively(request) {
-  const { listkey } = request.payload
-  // 1. 
-  // 2. 
+  const { id } = request.payload
+  // if id is folder:
+  //    get the fileids
+  //    for each file id dispatch DELETE_FOLDER_RECUSIVELY
+  // dispatch DELETE_RESOURCES for the id
+  const children = yield select(state => getResources(state.files, id))
+  if (children) {
+    for (const c of children) {
+      yield put({
+        type: DELETE_FOLDER_RECURSIVELY,
+        payload: {
+          id: c.id
+        }
+      })
+    }
+  }
+  yield put({
+    type: actionTypes.DELETE_RESOURCES,
+    resources: {
+      files: [id]
+    }
+  })
 
 }

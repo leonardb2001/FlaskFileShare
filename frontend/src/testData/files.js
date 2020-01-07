@@ -9,7 +9,6 @@ const makeRejPromise = (data) => () =>
     setTimeout(() => rej(data), 1000)
   })
 
-
 export const getFiles200 = makeResPromise({
   status: 200,
   resources: [

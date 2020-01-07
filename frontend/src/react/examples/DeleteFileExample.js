@@ -16,7 +16,7 @@ class DeleteFileExample extends React.Component {
         <button style={{ display: 'block' }} onClick={ () => {
           dispatch(deleteFile(
             REQUEST_KEY,
-            'n9an3l2kd8sna92n',
+            '9e32f25dab6c4d7f8bd54a4bfba9ccd9.n9an3l2kd8sna92n',
             '<authToken>'
           ))
         }}>DeleteFile</button>
