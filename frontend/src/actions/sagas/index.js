@@ -3,9 +3,9 @@ import { takeEvery } from 'redux-saga/effects'
 import { actionTypes } from 'redux-resource'
 
 import { getUsers, postUser, deleteUser } from './users'
-import { getFiles, postFile, deleteFile } from './files'
+import { getFiles, postFile, deleteFile, deleteFolderRecursively } from './files'
 import authTokenSaga from './auth'
-import { READ_AUTH_TOKEN_PENDING } from '../../globals/actionTypes'
+import { READ_AUTH_TOKEN_PENDING, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
 
 export default function* rootSaga() {
   yield takeEvery(READ_AUTH_TOKEN_PENDING, authTokenSaga)
@@ -39,4 +39,6 @@ export default function* rootSaga() {
     request.type === actionTypes.DELETE_RESOURCES_PENDING
     && request.resourceType === 'files'
   ), deleteFile)
+
+  yield takeEvery(DELETE_FOLDER_RECURSIVELY, deleteFolderRecursively)
 }

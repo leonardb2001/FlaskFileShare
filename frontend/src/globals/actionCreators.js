@@ -67,7 +67,7 @@ export function getFiles(requestKey, list, userid, authToken) {
   }
 }
 
-export function postFile(requestKey, list, filename, path, type, userid, authToken) {
+export function postFile(requestKey, list, filename, path, type, parentid, authToken) {
   return {
     type: actionTypes.CREATE_RESOURCES_PENDING,
     resourceType: 'files',
@@ -77,7 +77,7 @@ export function postFile(requestKey, list, filename, path, type, userid, authTok
       filename,
       path,
       type,
-      userid,
+      parentid,
       authToken
     }
   }

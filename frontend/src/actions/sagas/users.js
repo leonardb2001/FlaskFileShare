@@ -1,6 +1,6 @@
 
 import { actionTypes } from 'redux-resource'
-import { put, call } from 'redux-saga/effects'
+import { put, call, select } from 'redux-saga/effects'
 
 import {
   getUser200,
@@ -85,6 +85,15 @@ export function* deleteUser(request) {
         statusCode: res.status
       }
     })
+    const userFiles = yield select(state => state.files.lists[userid])
+    if (userFiles) {
+      yield put({
+        type: actionTypes.DELETE_RESOURCES,
+        resources: {
+          files: userFiles
+        }
+      })
+    }
   } catch (err) {
     yield put({
       type: actionTypes.DELETE_RESOURCES_FAILED,

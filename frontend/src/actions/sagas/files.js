@@ -2,6 +2,8 @@
 import { actionTypes } from 'redux-resource'
 import { put, call, select } from 'redux-saga/effects'
 
+import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
+
 import {
   getFiles200,
 //  getFiles401,
@@ -32,7 +34,7 @@ export function* getFiles(request) {
     let fileChildrenLists = {}
     for (const resource of res.resources) {
       resource.id = getFileId(userid, resource.id)
-      if (resource.type == 'd') {
+      if (resource.type === 'd') {
         fileChildrenLists[resource.id] = resource.children
         delete resource.children
       }
@@ -76,35 +78,42 @@ export function* getFiles(request) {
  * - add the fileid to the list of the files of the user
  */
 export function* postFile(request) {
-  // const { filename, path, type, userid, parentid, authToken } = request.args
-  //                                       ========= new
-  const { userid, parentid } = request.args
+  const { filename, path, type, parentid, authToken } = request.args
+  const userid = parentid.split('.')[0]
   try {
     const res = yield call(postFile201)
-    res.resource.id = getFileId(userid, res.resource.id)
+    const id = getFileId(userid, res.resource.id)
+    res.resource.id = id
+    const newResource = {
+      id,
+      name: filename,
+      path,
+      type
+    }
     yield put({
       type: actionTypes.CREATE_RESOURCES_SUCCEEDED,
       resourceType: 'files',
       requestKey: request.requestKey,
-      resources: [res.resource],
+      resources: [newResource],
       list: request.list,
       requestProperties: {
         statusCode: res.status
       }
     })
-    const lists = {}
     if (parentid) {
-      const parentChildren = yield select(state => 
-        state.files.lists[parentid])
-      lists[parentid] = parentChildren.concat([res.resource.id])
+      yield put({
+        type: EXTEND_FILE_LIST,
+        payload: {
+          listkey: parentid,
+          files: [id]
+        }
+      })
     }
-    const userFiles = yield select(state =>
-      state.files.lists[userid] || [])
-    lists[userid] = userFiles.concat([res.resource.id])
     yield put({
-      type: actionTypes.UPDATE_RESOURCES,
-      lists: {
-        files: lists
+      type: EXTEND_FILE_LIST,
+      payload: {
+        listkey: userid,
+        files: [id]
       }
     })
   } catch (err) {
@@ -121,11 +130,11 @@ export function* postFile(request) {
 
 /**
  * deleteFile:
- * - if it is a folder, for all its children, dispatch a DELETE_RESOURCES action
+ * - if it is a folder, delete its children recursively
  * (- delete the list with its children)
  */
 export function* deleteFile(request) {
-  // const { fileid, userid, authToken } = request.args
+  // const { fileid, authToken } = request.args
   const fileid = request.args.fileid
   try {
     const res = yield call(deleteFile204)
@@ -138,6 +147,12 @@ export function* deleteFile(request) {
         statusCode: res.status
       }
     })
+    yield put({
+      type: DELETE_FOLDER_RECURSIVELY,
+      payload: {
+        listkey: fileid
+      }
+    })
   } catch (err) {
     yield put({
       type: actionTypes.DELETE_RESOURCES_FAILED,
@@ -148,4 +163,12 @@ export function* deleteFile(request) {
       }
     })
   }
+}
+
+
+export function* deleteFolderRecursively(request) {
+  const { listkey } = request.payload
+  // 1. 
+  // 2. 
+
 }
