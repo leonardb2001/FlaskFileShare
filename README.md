@@ -26,3 +26,4 @@ Das Ziel ist es, auf dem `master` Branch nur "sauberen", funktionierenden Code z
 - `maintenance`: Branch für Änderungen an READMEs, Schreibfehler fixes, Verwaltungsstuff, ...
 - `database`: Branch von Leonard mit Funktionen zur Datenbank (im Backend)
 - `redux_frontend`: Branch von Oliver mit einem System, um Testdaten (und potenziell Serverdaten) einfach abzurufen und zu verwalten (im Frontend)
+- `test_data_backend`: Branch von Oliver mit Test-Routes, die gehardcodete Daten ausgeben, zum Ausprobieren des Frontends
