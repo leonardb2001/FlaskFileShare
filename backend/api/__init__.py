@@ -1,7 +1,8 @@
 from flask import Flask
 from api import dbinit
 
-dbinit.dataBase().createDB()
+db = dbinit.DataBase()
+db.createDB()
 
 app = Flask(__name__)
 
