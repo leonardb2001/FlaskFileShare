@@ -25,11 +25,11 @@ def verify_token(token):
 @app.route(prefix + '/auth_token')
 @login.login_required
 def auth_token():
-    return 'secret_auth_token'
+    return jsonify('secret_auth_token')
 
 
 # curl -H "Authorization: Bearer secret_auth_token" -i localhost:5000/test/users?username=tommy
-# curl -H "Authorization: Bearer secret_auth_token" -d '{"username":"u","email":"e","password":"p"}' -H "Content-Type: application/json" -i localhost:5000/test/users
+# curl -H "Authorization: Bearer secret_auth_token" -d '{"username":"u","email":"e","password":"p"}' -H "Content-Type: application/json" -X POST -i localhost:5000/test/users
 @app.route(prefix + '/users', methods=['GET', 'POST'])
 @auth.login_required
 def getUsers():
