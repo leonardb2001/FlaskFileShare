@@ -7,3 +7,4 @@ db.createDB()
 app = Flask(__name__)
 
 from api import routes
+from api import test
