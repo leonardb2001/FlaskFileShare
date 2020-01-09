@@ -21,6 +21,22 @@ def verify_token(token):
         return True
     return False
 
+@app.errorhandler(400)
+def handle400(e):
+    return (jsonify({'status':400}), 400)
+
+@app.errorhandler(401)
+def handle400(e):
+    return (jsonify({'status':401}), 401)
+
+@app.errorhandler(403)
+def handle400(e):
+    return (jsonify({'status':403}), 403)
+
+@app.errorhandler(404)
+def handle400(e):
+    return (jsonify({'status':404}), 404)
+
 # curl -i tommy:password123@localhost:5000/test/auth_token
 @app.route(prefix + '/auth_token')
 @login.login_required
@@ -44,13 +60,13 @@ def users():
             not 'username' in request.json or
             not 'email' in request.json or
             not 'password' in request.json):
-            abort(400)
+            abort(400, 'wrong json parameters')
         username = request.json.get('username')
         email = request.json.get('email')
         password = request.json.get('password')
         if username == 'tommy':
             abort(403)
-        return (jsonify({'id': 'aosien20n29na0sd9r3n20'}), 201)
+        return ('', 201) # return nothing when user registrates?
 
 # curl -i -x delete tommy:password123@localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9
 @app.route(prefix + '/users/<userid>', methods=['delete'])
@@ -60,8 +76,8 @@ def deleteuser(userid):
         return ('', 204)
     abort(401)
 
-# curl -h "authorization: bearer secret_auth_token" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
-# curl -h "authorization: bearer secret_auth_token" -d '{"path":"p","name":"n","type":"f"}' -h "content-type: application/json" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
+# curl -H "Authorization: Bearer secret_auth_token" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
+# curl -X POST -H "Authorization: Bearer secret_auth_token" -d '{"path":"p","name":"n","type":"f"}' -H "Content-Type: application/json" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
 @app.route(prefix + '/users/<userid>/files', methods=['get', 'post'])
 @auth.login_required
 def files(userid):
