@@ -31,6 +31,7 @@ class App extends React.Component {
     return (
       <>
         <Provider store={store}>
+          <i>Öffne das Developer-Menü (Chrome und Firefox: Shift-Strg-i), um Console-Logs zu sehen!</i>
           <Router>
             <Switch>
               { this.renderRoutes() }
@@ -43,6 +44,3 @@ class App extends React.Component {
 }
 
 export default App
-
-
-// <i>Öffne das Developer-Menü (Chrome und Firefox: Shift-Strg-i), um Console-Logs zu sehen!</i>
