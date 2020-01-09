@@ -10,9 +10,9 @@
 
 1. Python 3 [hier](https://www.python.org/downloads/) herunterladen
 2. In diesem Ordner virtuelle Umgebung einrichten mit `python -m venv venv`
-3. Virtuelle Umgebung starten:
-Unter Windows: `venv\Scripts\activate`
-Unter Linux: `source venv/bin/activate`
+3. Virtuelle Umgebung starten:  
+Windows: `venv\Scripts\activate`  
+Linux: `source venv/bin/activate`  
 Jetzt sollte an jedem Zeilenanfang im Terminal `(venv)` stehen.
 4. Dependencies installieren: `pip install -r requirements.txt`
 5. Mit Flask ausführen: `flask run`
