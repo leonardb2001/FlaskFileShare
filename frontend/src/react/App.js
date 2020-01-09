@@ -1,28 +1,42 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import { store } from '../store'
-import AuthenticationExample from './examples/AuthenticationExample'
-import UserSearchExample from './examples/UserSearchExample'
-import RegisterExample from './examples/RegisterExample'
-import DeleteUserExample from './examples/DeleteUserExample'
-import GetFilesExample from './examples/GetFilesExample'
-import PostFileExample from './examples/PostFileExample'
-import DeleteFileExample from './examples/DeleteFileExample'
+import routes from './routes';
+import { PrivateRoute } from './elements'
 
 class App extends React.Component {
+
+  renderRoutes = () => {
+    return routes.map((route, index) =>
+      route.private
+      ? <PrivateRoute
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={route.component}
+        /> 
+      : <Route
+          key={index}
+          path={route.path}
+          exact={route.exact}
+          component={route.component}
+        />
+    );
+  }
+
+
   render() {
     return (
       <>
         <Provider store={store}>
           <i>Öffne das Developer-Menü (Chrome und Firefox: Shift-Strg-i), um Console-Logs zu sehen!</i>
-          <AuthenticationExample />
-          <UserSearchExample />
-          <RegisterExample />
-          <DeleteUserExample />
-          <GetFilesExample />
-          <PostFileExample />
-          <DeleteFileExample />
+          <Router>
+            <Switch>
+              { this.renderRoutes() }
+            </Switch>
+          </Router>  
         </Provider>
       </>
     );
