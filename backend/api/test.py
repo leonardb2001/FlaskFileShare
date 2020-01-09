@@ -52,24 +52,24 @@ def users():
             abort(403)
         return (jsonify({'id': 'aosien20n29na0sd9r3n20'}), 201)
 
-# curl -i -X DELETE tommy:password123@localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9
-@app.route(prefix + '/users/<userid>', methods=['DELETE'])
+# curl -i -x delete tommy:password123@localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9
+@app.route(prefix + '/users/<userid>', methods=['delete'])
 @login.login_required
-def deleteUser(userid):
+def deleteuser(userid):
     if userid == '9e32f25dab6c4d7f8bd54a4bfba9ccd9' and login.username() == 'tommy':
         return ('', 204)
     abort(401)
 
-# curl -H "Authorization: Bearer secret_auth_token" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
-# curl -H "Authorization: Bearer secret_auth_token" -d '{"path":"p","name":"n","type":"f"}' -H "Content-Type: application/json" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
-@app.route(prefix + '/users/<userid>/files', methods=['GET', 'POST'])
+# curl -h "authorization: bearer secret_auth_token" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
+# curl -h "authorization: bearer secret_auth_token" -d '{"path":"p","name":"n","type":"f"}' -h "content-type: application/json" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
+@app.route(prefix + '/users/<userid>/files', methods=['get', 'post'])
 @auth.login_required
 def files(userid):
-    if request.method == 'GET':
+    if request.method == 'get':
         if userid == '9e32f25dab6c4d7f8bd54a4bfba9ccd9':
             return jsonify(testdata.files)
         abort(404)
-    if request.method == 'POST':
+    if request.method == 'post':
         if userid != '9e32f25dab6c4d7f8bd54a4bfba9ccd9':
             abort(404)
         if (not request.json or
@@ -90,3 +90,11 @@ def files(userid):
                 'type': type
             }), 201)
 
+
+# curl -i -X DELETE -H "Authorization: Bearer secret_auth_token" localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files/ni28fn29ap2ndc23
+@app.route(prefix + '/users/<userid>/files/<fileid>', methods=['delete'])
+@auth.login_required
+def deletefile(userid, fileid):
+    if userid == '9e32f25dab6c4d7f8bd54a4bfba9ccd9' and fileid == 'ni28fn29ap2ndc23':
+        return ('', 204)
+    abort(404)
