@@ -4,7 +4,9 @@
 
 ## Struktur
 - `api/`: Flask Server Api (Backend)
+- `.flaskenv`: Datei, die die Konfiguration (entry point und environment) für Flask enthält
 - `main.py`: "Entry Point" des Servers
+- `requirements.txt`: Auflistung aller Dependencies, um diese automatisch installieren zu können (siehe 4. unten)
 
 # Anleitung
 
