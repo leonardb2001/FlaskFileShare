@@ -21,5 +21,35 @@ users = [
       'username': 'frankchicken',
       'email': 'frankfrankfrank@t-online.de'
     }
-  ]
+]
 
+files = [
+    {
+        'id': '8wb302bsn28lsi20',
+        'name': 'Hinweise.pdf',
+        'path': '',
+        'type': 'f'
+    },
+    {
+        'id': 'n9an3l2kd8sna92n',
+        'name': 'Mitschnitte',
+        'path': '',
+        'type': 'd',
+        'children': [
+            '9aw211j9abbslwei',
+            '0anvhd73g1dssu50'
+        ]
+    },
+    {
+        'id': '9aw211j9abbslwei',
+        'name': 'Vorlesung1.mp4',
+        'path': 'Mitschnitte/',
+        'type': 'f'
+    },
+    {
+        'id': '0anvhd73g1dssu50',
+        'name': 'Vorlesung2.mp4',
+        'path': 'Mitschnitte/',
+        'type': 'f'
+    }
+]

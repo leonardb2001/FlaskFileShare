@@ -32,7 +32,7 @@ def auth_token():
 # curl -H "Authorization: Bearer secret_auth_token" -d '{"username":"u","email":"e","password":"p"}' -H "Content-Type: application/json" -X POST -i localhost:5000/test/users
 @app.route(prefix + '/users', methods=['GET', 'POST'])
 @auth.login_required
-def getUsers():
+def users():
     if request.method == 'GET':
         username = request.args.get('username')
         if username == None:
@@ -51,4 +51,42 @@ def getUsers():
         if username == 'tommy':
             abort(403)
         return (jsonify({'id': 'aosien20n29na0sd9r3n20'}), 201)
+
+# curl -i -X DELETE tommy:password123@localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9
+@app.route(prefix + '/users/<userid>', methods=['DELETE'])
+@login.login_required
+def deleteUser(userid):
+    if userid == '9e32f25dab6c4d7f8bd54a4bfba9ccd9' and login.username() == 'tommy':
+        return ('', 204)
+    abort(401)
+
+# curl -H "Authorization: Bearer secret_auth_token" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
+# curl -H "Authorization: Bearer secret_auth_token" -d '{"path":"p","name":"n","type":"f"}' -H "Content-Type: application/json" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
+@app.route(prefix + '/users/<userid>/files', methods=['GET', 'POST'])
+@auth.login_required
+def files(userid):
+    if request.method == 'GET':
+        if userid == '9e32f25dab6c4d7f8bd54a4bfba9ccd9':
+            return jsonify(testdata.files)
+        abort(404)
+    if request.method == 'POST':
+        if userid != '9e32f25dab6c4d7f8bd54a4bfba9ccd9':
+            abort(404)
+        if (not request.json or
+            not 'path' in request.json or
+            not 'name' in request.json or
+            not 'type' in request.json):
+            abort(400, 'wrong json')
+        path = request.json.get('path')
+        name = request.json.get('name')
+        type = request.json.get('type')
+        if type not in ['f', 'd']:
+            abort(400, 'wrong file type')
+        return (jsonify(
+            {
+                'id': 'ni28fn29ap2ndc23',
+                'path': path,
+                'name': name,
+                'type': type
+            }), 201)
 
