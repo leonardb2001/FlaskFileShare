@@ -5,13 +5,6 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { store } from '../store'
 import routes from './routes';
 import { PrivateRoute } from './elements'
-import AuthenticationExample from './examples/AuthenticationExample'
-import UserSearchExample from './examples/UserSearchExample'
-import RegisterExample from './examples/RegisterExample'
-import DeleteUserExample from './examples/DeleteUserExample'
-import GetFilesExample from './examples/GetFilesExample'
-import PostFileExample from './examples/PostFileExample'
-import DeleteFileExample from './examples/DeleteFileExample'
 
 class App extends React.Component {
 

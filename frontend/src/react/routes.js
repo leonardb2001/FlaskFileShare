@@ -1,7 +1,4 @@
 
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-
 import * as scenes from './scenes'
 
 const routes = [
@@ -40,6 +37,12 @@ const routes = [
     exact: true,
     component: scenes.Upload,
     private: false // actually true
+  },
+  {
+    path: '',
+    exact: false,
+    component: scenes.NotFound,
+    private: false
   }
 ]
 
