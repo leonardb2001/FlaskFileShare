@@ -37,6 +37,10 @@ def handle400(e):
 def handle400(e):
     return (jsonify({'status':404}), 404)
 
+@app.errorhandler(405)
+def handle400(e):
+    return (jsonify({'status':405}), 405)
+
 # curl -i tommy:password123@localhost:5000/test/auth_token
 @app.route(prefix + '/auth_token')
 @login.login_required
