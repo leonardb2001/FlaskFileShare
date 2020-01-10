@@ -41,10 +41,6 @@ def handle404(e):
 def handle405(e):
     return (jsonify({'status':405}), 405)
 
-@app.route(prefix)
-def test():
-    return jsonify('test')
-
 # curl -i tommy:password123@localhost:5000/test/auth_token
 @app.route(prefix + '/auth_token')
 @login.login_required
