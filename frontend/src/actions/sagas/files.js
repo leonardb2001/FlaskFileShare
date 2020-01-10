@@ -1,13 +1,11 @@
 
 import { actionTypes, getResources } from 'redux-resource'
 import { put, call, select } from 'redux-saga/effects'
+import axios from 'axios'
 
 import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
 
 import {
-  getFiles200,
-//  getFiles401,
-//  getFiles404,
   postFile201,
 //  postFile401,
 //  postFile404,
@@ -16,13 +14,11 @@ import {
 //  deleteFile404
 } from '../../testData/files'
 
-function getFileId(userid, fileid) {
-  return `${userid}.${fileid}`
-}
+const DOMAIN = 'http://localhost:5000'
+const AUTH_TOKEN = 'secret_auth_token'
 
 /**
  * getFiles:
- * - create unique file ids with '<userid>.<fileid>'
  * - for every folder, create a list with its children
  * - create a list for the user with his/her fileids
  */
@@ -30,14 +26,21 @@ export function* getFiles(request) {
   // const { userid, authToken } = request.args
   const userid = request.args.userid
   try {
-    const response = yield call(getFiles200)
-    const resources = response.resources
+    const response = yield call(
+      axios.get,
+      DOMAIN + '/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files',
+      {
+        headers: {
+          'Authorization': 'bearer ' + AUTH_TOKEN
+        }
+      }
+    )
+    console.log(response)
+    const resources = response.data
     let fileChildrenLists = {}
     for (const resource of resources) {
-      resource.id = getFileId(userid, resource.id)
       if (resource.type === 'd') {
-        fileChildrenLists[resource.id] = resource.children.map(id =>
-          getFileId(userid, id))
+        fileChildrenLists[resource.id] = resource.children
         delete resource.children
       }
     }
@@ -85,8 +88,7 @@ export function* postFile(request) {
   const userid = parentid.split('.')[0]
   try {
     const res = yield call(postFile201)
-    const id = getFileId(userid, res.resource.id)
-    res.resource.id = id
+    const id = res.resource.id
     const newResource = {
       id,
       name: filename,
