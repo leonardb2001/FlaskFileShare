@@ -5,12 +5,6 @@ import axios from 'axios'
 
 import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
 
-import {
-  deleteFile204,
-//  deleteFile401,
-//  deleteFile404
-} from '../../testData/files'
-
 const DOMAIN = 'http://localhost:5000'
 const AUTH_TOKEN = 'secret_auth_token'
 
@@ -150,7 +144,15 @@ export function* deleteFile(request) {
   // const { fileid, authToken } = request.args
   const fileid = request.args.fileid
   try {
-    const res = yield call(deleteFile204)
+    const res = yield call(
+      axios.delete,
+      DOMAIN + '/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files/ni28fn29ap2ndc23',
+      {
+        headers: {
+          'Authorization': 'bearer ' + AUTH_TOKEN
+        }
+      }
+  )
     yield put({
       type: actionTypes.DELETE_RESOURCES_SUCCEEDED,
       resourceType: 'files',
