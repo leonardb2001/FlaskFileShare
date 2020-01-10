@@ -75,7 +75,7 @@ def users():
 # curl -i -x delete tommy:password123@localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9
 @app.route(prefix + '/users/<userid>', methods=['DELETE'])
 @login.login_required
-def deleteuser(userid):
+def deleteUser(userid):
     if userid == '9e32f25dab6c4d7f8bd54a4bfba9ccd9' and login.username() == 'tommy':
         return ('', 204)
     abort(401)
