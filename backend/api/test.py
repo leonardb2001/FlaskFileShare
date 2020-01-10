@@ -26,26 +26,30 @@ def handle400(e):
     return (jsonify({'status':400}), 400)
 
 @app.errorhandler(401)
-def handle400(e):
+def handle401(e):
     return (jsonify({'status':401}), 401)
 
 @app.errorhandler(403)
-def handle400(e):
+def handle403(e):
     return (jsonify({'status':403}), 403)
 
 @app.errorhandler(404)
-def handle400(e):
+def handle404(e):
     return (jsonify({'status':404}), 404)
 
 @app.errorhandler(405)
-def handle400(e):
+def handle405(e):
     return (jsonify({'status':405}), 405)
+
+@app.route(prefix)
+def test():
+    return jsonify('test')
 
 # curl -i tommy:password123@localhost:5000/test/auth_token
 @app.route(prefix + '/auth_token')
 @login.login_required
 def auth_token():
-    return jsonify('secret_auth_token')
+    return jsonify(testdata.login)
 
 
 # curl -H "Authorization: Bearer secret_auth_token" -i localhost:5000/test/users?username=tommy

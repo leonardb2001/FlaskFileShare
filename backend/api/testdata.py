@@ -1,4 +1,9 @@
 
+login = {
+    'userid': '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
+    'auth_token': 'secret_auth_token',
+    'username': 'tommy'
+}
 
 users = [
     {
