@@ -6,9 +6,6 @@ import axios from 'axios'
 import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
 
 import {
-  postFile201,
-//  postFile401,
-//  postFile404,
   deleteFile204,
 //  deleteFile401,
 //  deleteFile404
@@ -35,7 +32,6 @@ export function* getFiles(request) {
         }
       }
     )
-    console.log(response)
     const resources = response.data
     let fileChildrenLists = {}
     for (const resource of resources) {
@@ -78,7 +74,6 @@ export function* getFiles(request) {
 
 /**
  * postFile:
- * - generate the new unique fileid
  * - if inside a folder, add the fileid to the list of its children
  * - add the fileid to the list of the files of the user
  */
@@ -87,8 +82,21 @@ export function* postFile(request) {
   const { filename, path, type, parentid } = request.args
   const userid = parentid.split('.')[0]
   try {
-    const res = yield call(postFile201)
-    const id = res.resource.id
+    const res = yield call(
+      axios.post,
+      DOMAIN + '/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files',
+      {
+        path: '/test',
+        name: 'example.txt',
+        type: 'f'
+      },
+      {
+        headers: {
+          'Authorization': 'bearer ' + AUTH_TOKEN
+        }
+      }
+    )
+    const id = res.data.id
     const newResource = {
       id,
       name: filename,
