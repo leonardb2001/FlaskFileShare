@@ -1,6 +1,4 @@
 
-import { actionTypes } from 'redux-resource'
-
 import {
   READ_AUTH_TOKEN_PENDING,
   READ_AUTH_TOKEN_SUCCESS,
@@ -8,12 +6,22 @@ import {
   LOGOUT
 } from '../../globals/actionTypes'
 
+function makeStatus(status) {
+  return {
+    idle: status === 'idle',
+    pending: status === 'pending',
+    failed: status === 'failed',
+    succeeded: status === 'succeeded'
+  }
+}
+
 const initialState = {
   isAuthenticated: false,
   username: null,
   auth_token: null,
-  loading: false,
-  statusCode: null
+  userid: null,
+  statusCode: null,
+  status: makeStatus('idle')
 }
 
 export default function authReducer(state = initialState, action) {
@@ -21,7 +29,8 @@ export default function authReducer(state = initialState, action) {
     case READ_AUTH_TOKEN_PENDING:
       return {
         ...state,
-        loading: true
+        statusCode: null,
+        status: makeStatus('pending')
       }
     case READ_AUTH_TOKEN_SUCCESS:
       return {
@@ -29,8 +38,9 @@ export default function authReducer(state = initialState, action) {
         isAuthenticated: true,
         username: action.payload.username,
         auth_token: action.payload.auth_token,
-        loading: false,
-        statusCode: action.payload.status
+        userid: action.payload.userid,
+        statusCode: action.payload.status,
+        status: makeStatus('succeeded')
       }
     case READ_AUTH_TOKEN_FAILURE:
       return {
@@ -38,12 +48,11 @@ export default function authReducer(state = initialState, action) {
         isAuthenticated: false,
         username: null,
         auth_token: null,
-        loading: false,
-        statusCode: action.payload.status
+        userid: null,
+        statusCode: action.payload.status,
+        status: makeStatus('failed')
       }
     case LOGOUT:
-      return initialState
-    case actionTypes.DELETE_RESOURCES_SUCCEEDED:
       return initialState
     default:
       return state
