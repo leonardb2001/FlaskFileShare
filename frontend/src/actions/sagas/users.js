@@ -1,27 +1,27 @@
 
 import { actionTypes } from 'redux-resource'
 import { put, call, select } from 'redux-saga/effects'
+import axios from 'axios'
 
-import {
-  getUser200,
-//  getUser401,
-  postUser201,
-//  postUser403,
-  deleteUser204,
-//  deleteUser401,
-//  deleteUser404
-} from '../../testData/users'
-
+const DOMAIN = 'http://localhost:5000'
 
 export function* getUsers(request) {
   // const { username, authToken } = request.args
   try {
-    const res = yield call(getUser200)
+    const res = yield call(
+      axios.get,
+      DOMAIN + '/test/users?username=tommy',
+      {
+        headers: {
+          'Authorization': 'bearer secret_auth_token'
+        }
+      }
+    )
     yield put({
       type: actionTypes.READ_RESOURCES_SUCCEEDED,
       resourceType: 'users',
       requestKey: request.requestKey,
-      resources: res.resources,
+      resources: res.data,
       list: request.list,
       requestProperties: {
         statusCode: res.status
@@ -42,12 +42,25 @@ export function* getUsers(request) {
 export function* postUser(request) {
   // const { username, email, password } = request.args
   try {
-    const res = yield call(postUser201)
+    const res = yield call(
+      axios.post,
+      DOMAIN + '/test/users',
+      {
+        username: 'jane',
+        email: 'jane@gmail.com',
+        password: 'password123'
+      },
+      {
+        headers: {
+          'Authorization': 'bearer secret_auth_token'
+        }
+      }
+    )
     yield put({
       type: actionTypes.CREATE_RESOURCES_SUCCEEDED,
       resourceType: 'users',
       requestKey: request.requestKey,
-      resources: res.resources,
+      resources: [],
       list: request.list,
       requestProperties: {
         statusCode: res.status
@@ -75,7 +88,16 @@ export function* deleteUser(request) {
   // const { userid, authToken } = request.args
   const userid = request.args.userid
   try {
-    const res = yield call(deleteUser204)
+    const res = yield call(
+      axios.delete,
+      DOMAIN + '/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9',
+      {
+        auth: {
+          username: 'tommy',
+          password: 'password123'
+        }
+      }
+    )
     yield put({
       type: actionTypes.DELETE_RESOURCES_SUCCEEDED,
       resourceType: 'users',
