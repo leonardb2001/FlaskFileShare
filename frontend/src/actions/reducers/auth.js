@@ -39,7 +39,7 @@ export default function authReducer(state = initialState, action) {
         username: action.payload.username,
         auth_token: action.payload.auth_token,
         userid: action.payload.userid,
-        statusCode: action.payload.status,
+        statusCode: action.payload.statusCode,
         status: makeStatus('succeeded')
       }
     case READ_AUTH_TOKEN_FAILURE:
@@ -49,7 +49,7 @@ export default function authReducer(state = initialState, action) {
         username: null,
         auth_token: null,
         userid: null,
-        statusCode: action.payload.status,
+        statusCode: action.payload.statusCode,
         status: makeStatus('failed')
       }
     case LOGOUT:

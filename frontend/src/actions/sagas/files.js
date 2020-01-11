@@ -56,12 +56,13 @@ export function* getFiles(request) {
       }
     })
   } catch (err) {
+    const status = (error.response || {}).status
     yield put({
       type: actionTypes.READ_RESOURCES_FAILED,
       resourceType: 'files',
       requestKey: request.requestKey,
       requestProperties: {
-        statusCode: err.status
+        statusCode: status || null
       }
     })
   }
@@ -124,12 +125,13 @@ export function* postFile(request) {
       }
     })
   } catch (err) {
+    const status = (error.response || {}).status
     yield put({
       type: actionTypes.CREATE_RESOURCES_FAILED,
       resourceType: 'files',
       requestKey: request.requestKey,
       requestProperties: {
-        statusCode: err.status
+        statusCode: status || null
       }
     })
   }
@@ -168,12 +170,13 @@ export function* deleteFile(request) {
       }
     })
   } catch (err) {
+    const status = (error.response || {}).status
     yield put({
       type: actionTypes.DELETE_RESOURCES_FAILED,
       resourceType: 'files',
       requestKey: request.requestKey,
       requestProperties: {
-        statusCode: err.status
+        statusCode: status || null
       }
     })
   }

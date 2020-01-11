@@ -31,12 +31,13 @@ export function* getUsers(request) {
       }
     })
   } catch (err) {
+    const status = (error.response || {}).status
     yield put({
       type: actionTypes.READ_RESOURCES_FAILED,
       resourceType: 'users',
       requestKey: request.requestKey,
       requestProperties: {
-        statusCode: err.status
+        statusCode: status || null
       }
     })
   }
@@ -65,12 +66,13 @@ export function* postUser(request) {
       }
     })
   } catch (err) {
+    const status = (error.response || {}).status
     yield put({
       type: actionTypes.CREATE_RESOURCES_FAILED,
       resourceType: 'users',
       requestKey: request.requestKey,
       requestProperties: {
-        statusCode: err.status
+        statusCode: status || null
       }
     })
   }
@@ -114,12 +116,13 @@ export function* deleteUser(request) {
       })
     }
   } catch (err) {
+    const status = (error.response || {}).status
     yield put({
       type: actionTypes.DELETE_RESOURCES_FAILED,
       resourceType: 'users',
       requestKey: request.requestKey,
       requestProperties: {
-        statusCode: err.status
+        statusCode: state || null
       }
     })
   }
