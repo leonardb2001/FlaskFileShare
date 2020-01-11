@@ -31,8 +31,9 @@ class Navbar extends React.Component {
             <Button variant='contained' className={classes.light} component={Link} to='/'>home</Button>
             { isAuthenticated &&
             <ButtonGroup variant='contained' color='primary'>
-              <Button className={classes.light} component={Link} to='/users/tommy'>user</Button>
+              <Button className={classes.light} component={Link} to='/users/tommy'>example user</Button>
               <Button className={classes.light} component={Link} to='/user-search/test'>search</Button>
+              <Button className={classes.light} component={Link} to='/logout'>logout</Button>
             </ButtonGroup>
             }
             { !isAuthenticated &&
