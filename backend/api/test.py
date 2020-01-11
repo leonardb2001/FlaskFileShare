@@ -23,23 +23,33 @@ def verify_token(token):
 
 @app.errorhandler(400)
 def handle400(e):
-    return (jsonify({'status':400}), 400)
+    if hasattr(e, 'description'):
+        return (jsonify({'status':400, 'message': e.description}), 400)
+    return (jsonify({'status':400, 'message': ''}), 400)
 
 @app.errorhandler(401)
 def handle401(e):
-    return (jsonify({'status':401}), 401)
+    if hasattr(e, 'description'):
+        return (jsonify({'status':401, 'message': e.description}), 401)
+    return (jsonify({'status':401, 'message': ''}), 401)
 
 @app.errorhandler(403)
 def handle403(e):
-    return (jsonify({'status':403}), 403)
+    if hasattr(e, 'description'):
+        return (jsonify({'status':403, 'message': e.description}), 403)
+    return (jsonify({'status':403, 'message': ''}), 403)
 
 @app.errorhandler(404)
 def handle404(e):
-    return (jsonify({'status':404}), 404)
+    if hasattr(e, 'description'):
+        return (jsonify({'status':404, 'message': e.description}), 404)
+    return (jsonify({'status':404, 'message': ''}), 404)
 
 @app.errorhandler(405)
 def handle405(e):
-    return (jsonify({'status':405}), 405)
+    if hasattr(e, 'description'):
+        return (jsonify({'status':405, 'message': e.description}), 405)
+    return (jsonify({'status':405, 'message': ''}), 405)
 
 # curl -i tommy:password123@localhost:5000/test/auth_token
 @app.route(prefix + '/auth_token')
@@ -54,7 +64,7 @@ def auth_token():
 def getUsers():
     username = request.args.get('username')
     if username == None:
-        abort(400)
+        abort(400, 'no username specified')
     return jsonify(testdata.users)
 
 # curl -d '{"username":"u","email":"e","password":"p"}' -H "Content-Type: application/json" -X POST -i localhost:5000/test/users
