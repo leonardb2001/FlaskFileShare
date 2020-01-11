@@ -42,16 +42,17 @@ export function postUser(requestKey, list, username, email, password) {
   }
 }
 
-export function deleteUser(requestKey, userid, authToken) {
+export function deleteUser(requestKey, userid, username, password) {
   return {
     type: actionTypes.DELETE_RESOURCES_PENDING,
     resourceType: 'users',
     requestKey,
     args: {
       userid,
-      authToken
+      username,
+      password
     }
-  }
+  } 
 }
 
 export function getFiles(requestKey, list, userid, authToken) {
@@ -67,13 +68,14 @@ export function getFiles(requestKey, list, userid, authToken) {
   }
 }
 
-export function postFile(requestKey, list, filename, path, type, parentid, authToken) {
+export function postFile(requestKey, list, userid, filename, path, type, parentid, authToken) {
   return {
     type: actionTypes.CREATE_RESOURCES_PENDING,
     resourceType: 'files',
     requestKey,
     list,
     args: {
+      userid,
       filename,
       path,
       type,

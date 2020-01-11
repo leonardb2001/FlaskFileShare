@@ -1,43 +1,37 @@
 
 import { actionTypes, getResources } from 'redux-resource'
 import { put, call, select } from 'redux-saga/effects'
+import axios from 'axios'
 
 import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
 
-import {
-  getFiles200,
-//  getFiles401,
-//  getFiles404,
-  postFile201,
-//  postFile401,
-//  postFile404,
-  deleteFile204,
-//  deleteFile401,
-//  deleteFile404
-} from '../../testData/files'
-
-function getFileId(userid, fileid) {
-  return `${userid}.${fileid}`
-}
+import { DOMAIN } from '../../globals/constants'
 
 /**
  * getFiles:
- * - create unique file ids with '<userid>.<fileid>'
  * - for every folder, create a list with its children
  * - create a list for the user with his/her fileids
  */
 export function* getFiles(request) {
-  // const { userid, authToken } = request.args
-  const userid = request.args.userid
+  const { userid, authToken } = request.args
   try {
-    const response = yield call(getFiles200)
-    const resources = response.resources
+    const response = yield call(
+      axios.get,
+      DOMAIN + '/test/files',
+      {
+        headers: {
+          'Authorization': 'bearer ' + authToken
+        },
+        params: {
+          userid
+        }
+      }
+    )
+    const resources = response.data
     let fileChildrenLists = {}
     for (const resource of resources) {
-      resource.id = getFileId(userid, resource.id)
       if (resource.type === 'd') {
-        fileChildrenLists[resource.id] = resource.children.map(id =>
-          getFileId(userid, id))
+        fileChildrenLists[resource.id] = resource.children
         delete resource.children
       }
     }
@@ -75,18 +69,30 @@ export function* getFiles(request) {
 
 /**
  * postFile:
- * - generate the new unique fileid
  * - if inside a folder, add the fileid to the list of its children
  * - add the fileid to the list of the files of the user
  */
 export function* postFile(request) {
-  // const { filename, path, type, parentid, authToken } = request.args
-  const { filename, path, type, parentid } = request.args
-  const userid = parentid.split('.')[0]
+  const { userid, filename, path, type, parentid, authToken } = request.args
   try {
-    const res = yield call(postFile201)
-    const id = getFileId(userid, res.resource.id)
-    res.resource.id = id
+    const res = yield call(
+      axios.post,
+      DOMAIN + '/test/files',
+      {
+        filename,
+        path,
+        type,
+        parentid,
+        userid
+      },
+      {
+        headers: {
+          'Authorization': 'bearer ' + authToken
+        }
+      }
+    )
+    console.log(res)
+    const id = res.data.id
     const newResource = {
       id,
       name: filename,
@@ -103,15 +109,13 @@ export function* postFile(request) {
         statusCode: res.status
       }
     })
-    if (parentid) {
-      yield put({
-        type: EXTEND_FILE_LIST,
-        payload: {
-          listkey: parentid,
-          files: [id]
-        }
-      })
-    }
+    yield put({
+      type: EXTEND_FILE_LIST,
+      payload: {
+        listkey: parentid,
+        files: [id]
+      }
+    })
     yield put({
       type: EXTEND_FILE_LIST,
       payload: {
@@ -137,10 +141,17 @@ export function* postFile(request) {
  * (- delete the list with its children)
  */
 export function* deleteFile(request) {
-  // const { fileid, authToken } = request.args
-  const fileid = request.args.fileid
+  const { fileid, authToken } = request.args
   try {
-    const res = yield call(deleteFile204)
+    const res = yield call(
+      axios.delete,
+      DOMAIN + '/test/files/' + fileid,
+      {
+        headers: {
+          'Authorization': 'bearer ' + authToken
+        }
+      }
+  )
     yield put({
       type: actionTypes.DELETE_RESOURCES_SUCCEEDED,
       resourceType: 'files',
@@ -159,7 +170,7 @@ export function* deleteFile(request) {
   } catch (err) {
     yield put({
       type: actionTypes.DELETE_RESOURCES_FAILED,
-      resourcesType: 'files',
+      resourceType: 'files',
       requestKey: request.requestKey,
       requestProperties: {
         statusCode: err.status

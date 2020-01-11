@@ -1,4 +1,9 @@
 
+login = {
+    'userid': '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
+    'auth_token': 'secret_auth_token',
+    'username': 'tommy'
+}
 
 users = [
     {
@@ -27,13 +32,13 @@ files = [
     {
         'id': '8wb302bsn28lsi20',
         'name': 'Hinweise.pdf',
-        'path': '',
+        'path': '/',
         'type': 'f'
     },
     {
         'id': 'n9an3l2kd8sna92n',
         'name': 'Mitschnitte',
-        'path': '',
+        'path': '/',
         'type': 'd',
         'children': [
             '9aw211j9abbslwei',
@@ -43,13 +48,13 @@ files = [
     {
         'id': '9aw211j9abbslwei',
         'name': 'Vorlesung1.mp4',
-        'path': 'Mitschnitte/',
+        'path': '/Mitschnitte/',
         'type': 'f'
     },
     {
         'id': '0anvhd73g1dssu50',
         'name': 'Vorlesung2.mp4',
-        'path': 'Mitschnitte/',
+        'path': '/Mitschnitte/',
         'type': 'f'
     }
 ]

@@ -18,7 +18,7 @@ class GetFilesExample extends React.Component {
             REQUEST_KEY,
             'filesOfTommy',
             '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
-            '<authToken>'
+            'secret_auth_token'
           ))
         }}>GetFiles</button>
       </>

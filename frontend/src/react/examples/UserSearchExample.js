@@ -18,7 +18,7 @@ class UserSearchExample extends React.Component {
             REQUEST_KEY,
             'userSearch',
             'tommy',
-            '<authToken>'
+            'secret_auth_token'
           ))
         }}>GetUsers</button>
       </>

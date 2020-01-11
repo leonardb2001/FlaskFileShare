@@ -17,7 +17,8 @@ class DeleteUserExample extends React.Component {
           dispatch(deleteUser(
             REQUEST_KEY,
             '9e32f25dab6c4d7f8bd54a4bfba9ccd9',
-            '<authToken>'
+            'tommy',
+            'password123'
           ))
         }}>DeleteUser</button>
       </>
