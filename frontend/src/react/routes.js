@@ -15,6 +15,12 @@ const routes = [
     private: false
   },
   {
+    path: '/logout',
+    exact: true,
+    component: scenes.Logout,
+    private: true
+  },
+  {
     path: '/register',
     exact: true,
     component: scenes.Register,

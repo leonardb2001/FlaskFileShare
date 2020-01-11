@@ -9,26 +9,30 @@ import { DOMAIN } from '../../globals/constants'
 export default function* authToken(request) {
   const { username, password } = request.args
   try {
-    let response = yield call(axios.get, DOMAIN + '/test/auth_token', {
-      auth: {
-        username,
-        password
+    let response = yield call(axios.get,
+      DOMAIN + '/test/auth_token',
+      {
+        auth: {
+          username: btoa(unescape(encodeURIComponent(username))),
+          password: btoa(unescape(encodeURIComponent(password)))
+        }
       }
-    })
+    )
     yield put({
       type: READ_AUTH_TOKEN_SUCCESS,
       payload: {
         username: response.data.username,
         auth_token: response.data.auth_token,
         userid: response.data.userid,
-        status: response.status
+        statusCode: response.status
       }
     })
   } catch (error) {
+    const status = (error.response || {}).status
     yield put({
       type: READ_AUTH_TOKEN_FAILURE,
       payload: {
-        status: error.status
+        statusCode: status || null
       }
     })
   }
