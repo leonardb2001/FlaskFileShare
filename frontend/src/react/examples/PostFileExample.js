@@ -17,11 +17,12 @@ class PostFileExample extends React.Component {
           dispatch(postFile(
             REQUEST_KEY,
             'filesOfTommy',
+            '9e32f25dab6c4d7f8bd54a4bfba9ccd9', 
             'Vorlesung3.mp4',
             'Mitschnitte/',
             'f',
-            '9e32f25dab6c4d7f8bd54a4bfba9ccd9.n9an3l2kd8sna92n',
-            '<authToken>'
+            'n9an3l2kd8sna92n',
+            'secret_auth_token'
           ))
         }}>PostFile</button>
       </>

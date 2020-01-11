@@ -6,14 +6,17 @@ import axios from 'axios'
 const DOMAIN = 'http://localhost:5000'
 
 export function* getUsers(request) {
-  // const { username, authToken } = request.args
+  const { username, authToken } = request.args
   try {
     const res = yield call(
       axios.get,
-      DOMAIN + '/test/users?username=tommy',
+      DOMAIN + '/test/users',
       {
         headers: {
-          'Authorization': 'bearer secret_auth_token'
+          'Authorization': 'bearer ' + authToken
+        },
+        params: {
+          username
         }
       }
     )
@@ -40,20 +43,15 @@ export function* getUsers(request) {
 }
 
 export function* postUser(request) {
-  // const { username, email, password } = request.args
+  const { username, email, password } = request.args
   try {
     const res = yield call(
       axios.post,
       DOMAIN + '/test/users',
       {
-        username: 'jane',
-        email: 'jane@gmail.com',
-        password: 'password123'
-      },
-      {
-        headers: {
-          'Authorization': 'bearer secret_auth_token'
-        }
+        username,
+        email,
+        password
       }
     )
     yield put({
@@ -85,16 +83,15 @@ export function* postUser(request) {
  * (- delete the file list of that user)
  */
 export function* deleteUser(request) {
-  // const { userid, authToken } = request.args
-  const userid = request.args.userid
+  const { userid, username, password } = request.args
   try {
     const res = yield call(
       axios.delete,
-      DOMAIN + '/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9',
+      DOMAIN + '/test/users/' + userid,
       {
         auth: {
-          username: 'tommy',
-          password: 'password123'
+          username,
+          password
         }
       }
     )

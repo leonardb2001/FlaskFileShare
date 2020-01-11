@@ -6,7 +6,6 @@ import axios from 'axios'
 import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
 
 const DOMAIN = 'http://localhost:5000'
-const AUTH_TOKEN = 'secret_auth_token'
 
 /**
  * getFiles:
@@ -14,15 +13,17 @@ const AUTH_TOKEN = 'secret_auth_token'
  * - create a list for the user with his/her fileids
  */
 export function* getFiles(request) {
-  // const { userid, authToken } = request.args
-  const userid = request.args.userid
+  const { userid, authToken } = request.args
   try {
     const response = yield call(
       axios.get,
-      DOMAIN + '/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files',
+      DOMAIN + '/test/files',
       {
         headers: {
-          'Authorization': 'bearer ' + AUTH_TOKEN
+          'Authorization': 'bearer ' + authToken
+        },
+        params: {
+          userid
         }
       }
     )
@@ -72,24 +73,25 @@ export function* getFiles(request) {
  * - add the fileid to the list of the files of the user
  */
 export function* postFile(request) {
-  // const { filename, path, type, parentid, authToken } = request.args
-  const { filename, path, type, parentid } = request.args
-  const userid = parentid.split('.')[0]
+  const { userid, filename, path, type, parentid, authToken } = request.args
   try {
     const res = yield call(
       axios.post,
-      DOMAIN + '/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files',
+      DOMAIN + '/test/files',
       {
-        path: '/test',
-        name: 'example.txt',
-        type: 'f'
+        filename,
+        path,
+        type,
+        parentid,
+        userid
       },
       {
         headers: {
-          'Authorization': 'bearer ' + AUTH_TOKEN
+          'Authorization': 'bearer ' + authToken
         }
       }
     )
+    console.log(res)
     const id = res.data.id
     const newResource = {
       id,
@@ -107,15 +109,13 @@ export function* postFile(request) {
         statusCode: res.status
       }
     })
-    if (parentid) {
-      yield put({
-        type: EXTEND_FILE_LIST,
-        payload: {
-          listkey: parentid,
-          files: [id]
-        }
-      })
-    }
+    yield put({
+      type: EXTEND_FILE_LIST,
+      payload: {
+        listkey: parentid,
+        files: [id]
+      }
+    })
     yield put({
       type: EXTEND_FILE_LIST,
       payload: {
@@ -141,15 +141,14 @@ export function* postFile(request) {
  * (- delete the list with its children)
  */
 export function* deleteFile(request) {
-  // const { fileid, authToken } = request.args
-  const fileid = request.args.fileid
+  const { fileid, authToken } = request.args
   try {
     const res = yield call(
       axios.delete,
-      DOMAIN + '/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files/ni28fn29ap2ndc23',
+      DOMAIN + '/test/files/' + fileid,
       {
         headers: {
-          'Authorization': 'bearer ' + AUTH_TOKEN
+          'Authorization': 'bearer ' + authToken
         }
       }
   )
@@ -171,7 +170,7 @@ export function* deleteFile(request) {
   } catch (err) {
     yield put({
       type: actionTypes.DELETE_RESOURCES_FAILED,
-      resourcesType: 'files',
+      resourceType: 'files',
       requestKey: request.requestKey,
       requestProperties: {
         statusCode: err.status

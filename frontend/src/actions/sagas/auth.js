@@ -6,12 +6,13 @@ import { READ_AUTH_TOKEN_SUCCESS, READ_AUTH_TOKEN_FAILURE } from '../../globals/
 
 const DOMAIN = 'http://localhost:5000'
 
-export default function* authToken(payload) {
+export default function* authToken(request) {
+  const { username, password } = request.args
   try {
     let response = yield call(axios.get, DOMAIN + '/test/auth_token', {
       auth: {
-        username: 'tommy',
-        password: 'password123'
+        username,
+        password
       }
     })
     yield put({
