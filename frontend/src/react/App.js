@@ -3,12 +3,30 @@ import { Provider } from 'react-redux'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import {
-  CssBaseline
+  CssBaseline,
+  createMuiTheme,
+  ThemeProvider
 } from '@material-ui/core'
 
 import { store } from '../store'
 import routes from './routes';
 import { PrivateRoute, Navbar } from './elements'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#e0e0e0',
+      light: '#ffffff',
+      dark: '#aeaeae'
+    },
+    secondary: {
+      main: '#ff5722',
+      light: '#ff8a50',
+      dark: '#c41c00'
+    }
+  }
+})
+
 
 class App extends React.Component {
 
@@ -36,12 +54,14 @@ class App extends React.Component {
       <>
         <CssBaseline/>
         <Provider store={store}>
-          <Navbar/>
-          <i>Öffne das Developer-Menü (Chrome und Firefox: Shift-Strg-i), um Console-Logs zu sehen!</i>
           <Router>
-            <Switch>
-              { this.renderRoutes() }
-            </Switch>
+            <ThemeProvider theme={theme}>
+              <Navbar/>
+              <i>Öffne das Developer-Menü (Chrome und Firefox: Shift-Strg-i), um Console-Logs zu sehen!</i>
+              <Switch>
+                { this.renderRoutes() }
+              </Switch>
+            </ThemeProvider>
           </Router>  
         </Provider>
       </>

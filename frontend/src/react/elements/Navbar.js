@@ -11,12 +11,15 @@ import {
   withStyles
 } from '@material-ui/core'
 
-const styles = {
+const styles = theme => ({
   toolbar: {
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
+  },
+  light: {
+    backgroundColor: theme.palette.primary.light
   }
-}
+})
 
 class Navbar extends React.Component {
   render() {
@@ -25,10 +28,17 @@ class Navbar extends React.Component {
       <>
         <AppBar position='static'>
           <Toolbar className={classes.toolbar}>
+            <Button variant='contained' className={classes.light} component={Link} to='/'>home</Button>
+            { isAuthenticated &&
+            <ButtonGroup variant='contained' color='primary'>
+              <Button className={classes.light} component={Link} to='/users/tommy'>user</Button>
+              <Button className={classes.light} component={Link} to='/user-search/test'>search</Button>
+            </ButtonGroup>
+            }
             { !isAuthenticated &&
-            <ButtonGroup variant='contained' color='secondary'>
-              <Button component={Link} to='/login'>login</Button>
-              <Button component={Link} to='/register'>register</Button>
+            <ButtonGroup variant='contained'>
+              <Button className={classes.light} component={Link} to='/login'>login</Button>
+              <Button className={classes.light} component={Link} to='/register'>register</Button>
             </ButtonGroup>
             }
           </Toolbar>
