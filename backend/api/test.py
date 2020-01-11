@@ -9,18 +9,6 @@ login = HTTPBasicAuth()
 auth = HTTPTokenAuth(scheme='Bearer')
 prefix = '/test'
 
-@login.verify_password
-def verify_password(username, password):
-    if username == 'tommy' and password == 'password123':
-        return True
-    return False
-
-@auth.verify_token
-def verify_token(token):
-    if token == 'secret_auth_token':
-        return True
-    return False
-
 @app.errorhandler(400)
 def handle400(e):
     if hasattr(e, 'description'):
@@ -51,12 +39,23 @@ def handle405(e):
         return (jsonify({'status':405, 'message': e.description}), 405)
     return (jsonify({'status':405, 'message': ''}), 405)
 
+@login.verify_password
+def verify_password(username, password):
+    if username == 'tommy' and password == 'password123':
+        return True
+    return False
+
+@auth.verify_token
+def verify_token(token):
+    if token == 'secret_auth_token':
+        return True
+    return False
+
 # curl -i tommy:password123@localhost:5000/test/auth_token
 @app.route(prefix + '/auth_token')
 @login.login_required
 def auth_token():
     return jsonify(testdata.login)
-
 
 # curl -H "Authorization: Bearer secret_auth_token" -i localhost:5000/test/users?username=tommy
 @app.route(prefix + '/users', methods=['GET'])
