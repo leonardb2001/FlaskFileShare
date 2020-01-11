@@ -76,6 +76,7 @@ class Login extends React.Component {
     const { classes } = this.props
     return (
       <Card square className={classes.card}>
+        <p><i>Do not enter your real credentials! Right credentials: tommy password123</i></p>
         <CardActions>
           <form className={classes.container}>
             <TextField
