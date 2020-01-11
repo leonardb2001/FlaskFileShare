@@ -2,9 +2,13 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
+import {
+  CssBaseline
+} from '@material-ui/core'
+
 import { store } from '../store'
 import routes from './routes';
-import { PrivateRoute } from './elements'
+import { PrivateRoute, Navbar } from './elements'
 
 class App extends React.Component {
 
@@ -30,7 +34,9 @@ class App extends React.Component {
   render() {
     return (
       <>
+        <CssBaseline/>
         <Provider store={store}>
+          <Navbar/>
           <i>Öffne das Developer-Menü (Chrome und Firefox: Shift-Strg-i), um Console-Logs zu sehen!</i>
           <Router>
             <Switch>
