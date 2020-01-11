@@ -30,15 +30,25 @@ users = [
 
 files = [
     {
+        'id': 'av923nbv9nadks',
+        'name': '_ROOT',
+        'path': '',
+        'type': 'r',
+        'children': [
+            '8wb302bsn28lsi20',
+            'n9an3l2kd8sna92n'
+        ]
+    },
+    {
         'id': '8wb302bsn28lsi20',
         'name': 'Hinweise.pdf',
-        'path': '',
+        'path': '_ROOT/',
         'type': 'f'
     },
     {
         'id': 'n9an3l2kd8sna92n',
         'name': 'Mitschnitte',
-        'path': '',
+        'path': '_ROOT/',
         'type': 'd',
         'children': [
             '9aw211j9abbslwei',

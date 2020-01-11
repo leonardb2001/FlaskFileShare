@@ -49,28 +49,29 @@ def auth_token():
 
 
 # curl -H "Authorization: Bearer secret_auth_token" -i localhost:5000/test/users?username=tommy
-# curl -H "Authorization: Bearer secret_auth_token" -d '{"username":"u","email":"e","password":"p"}' -H "Content-Type: application/json" -X POST -i localhost:5000/test/users
-@app.route(prefix + '/users', methods=['GET', 'POST'])
+@app.route(prefix + '/users', methods=['GET'])
 @auth.login_required
-def users():
-    if request.method == 'GET':
-        username = request.args.get('username')
-        if username == None:
-            abort(400)
-        else:
-            return jsonify(testdata.users)
-    if request.method == 'POST':
-        if (not request.json or
-            not 'username' in request.json or
-            not 'email' in request.json or
-            not 'password' in request.json):
-            abort(400, 'wrong json parameters')
-        username = request.json.get('username')
-        email = request.json.get('email')
-        password = request.json.get('password')
-        if username == 'tommy':
-            abort(403)
-        return ('', 201) # return nothing when user registrates?
+def getUsers():
+    username = request.args.get('username')
+    if username == None:
+        abort(400)
+    return jsonify(testdata.users)
+
+# curl -d '{"username":"u","email":"e","password":"p"}' -H "Content-Type: application/json" -X POST -i localhost:5000/test/users
+@app.route(prefix + '/users', methods=['POST'])
+def postUser():
+    if (not request.json or
+        not 'username' in request.json or
+        not 'email' in request.json or
+        not 'password' in request.json):
+        abort(400, 'wrong json parameters')
+    username = request.json.get('username')
+    email = request.json.get('email')
+    password = request.json.get('password')
+    if username == 'tommy':
+        abort(403)
+    return ('', 201) # return nothing when user registrates?
+
 
 # curl -i -x delete tommy:password123@localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9
 @app.route(prefix + '/users/<userid>', methods=['DELETE'])
@@ -82,23 +83,30 @@ def deleteUser(userid):
 
 # curl -H "Authorization: Bearer secret_auth_token" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
 # curl -X POST -H "Authorization: Bearer secret_auth_token" -d '{"path":"p","name":"n","type":"f"}' -H "Content-Type: application/json" -i localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files
-@app.route(prefix + '/users/<userid>/files', methods=['GET', 'POST'])
+@app.route(prefix + '/files', methods=['GET', 'POST'])
 @auth.login_required
-def files(userid):
+def files():
     if request.method == 'GET':
+        userid = request.args.get('userid')
+        if userid is None:
+            abort(400, 'no userid provided')
         if userid == '9e32f25dab6c4d7f8bd54a4bfba9ccd9':
             return jsonify(testdata.files)
         abort(404)
     if request.method == 'POST':
-        if userid != '9e32f25dab6c4d7f8bd54a4bfba9ccd9':
-            abort(404)
         if (not request.json or
+            not 'userid' in request.json or
+            not 'filename' in request.json or
             not 'path' in request.json or
-            not 'name' in request.json or
+            not 'parentid' in request.json or
             not 'type' in request.json):
             abort(400, 'wrong json')
+        userid = request.json.get('userid')
+        if userid != '9e32f25dab6c4d7f8bd54a4bfba9ccd9':
+            abort(404)
+        parentid = request.json.get('parentid')
         path = request.json.get('path')
-        name = request.json.get('name')
+        name = request.json.get('filename')
         type = request.json.get('type')
         if type not in ['f', 'd']:
             abort(400, 'wrong file type')
@@ -110,14 +118,14 @@ def files(userid):
                 'type': type
             })
         response.status_code = 201
-        response.headers['location'] = '/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files/ni28fn29ap2ndc23'
+        response.headers['location'] = '/files/ni28fn29ap2ndc23'
         return response
 
 
 # curl -i -X DELETE -H "Authorization: Bearer secret_auth_token" localhost:5000/test/users/9e32f25dab6c4d7f8bd54a4bfba9ccd9/files/ni28fn29ap2ndc23
-@app.route(prefix + '/users/<userid>/files/<fileid>', methods=['DELETE'])
+@app.route(prefix + '/files/<fileid>', methods=['DELETE'])
 @auth.login_required
-def deletefile(userid, fileid):
-    if userid == '9e32f25dab6c4d7f8bd54a4bfba9ccd9' and fileid == 'ni28fn29ap2ndc23':
+def deletefile(fileid):
+    if fileid == 'ni28fn29ap2ndc23':
         return ('', 204)
     abort(404)
