@@ -39,11 +39,19 @@ def handle405(e):
         return (jsonify({'status':405, 'message': e.description}), 405)
     return (jsonify({'status':405, 'message': ''}), 405)
 
+@login.error_handler
+def unauthorized():
+    return (jsonify({'status':401, 'message': 'wrong credentials'}), 401)
+
 @login.verify_password
 def verify_password(username, password):
     if username == 'tommy' and password == 'password123':
         return True
     return False
+
+@auth.error_handler
+def unauthorized():
+    return (jsonify({'status':401, 'message': 'wrong auth_token'}), 401)
 
 @auth.verify_token
 def verify_token(token):
