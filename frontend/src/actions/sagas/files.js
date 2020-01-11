@@ -5,7 +5,7 @@ import axios from 'axios'
 
 import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
 
-const DOMAIN = 'http://localhost:5000'
+import { DOMAIN } from '../../globals/constants'
 
 /**
  * getFiles:

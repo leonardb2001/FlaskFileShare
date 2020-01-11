@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { READ_AUTH_TOKEN_SUCCESS, READ_AUTH_TOKEN_FAILURE } from '../../globals/actionTypes'
 
-const DOMAIN = 'http://localhost:5000'
+import { DOMAIN } from '../../globals/constants'
 
 export default function* authToken(request) {
   const { username, password } = request.args

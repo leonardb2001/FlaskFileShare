@@ -3,7 +3,7 @@ import { actionTypes } from 'redux-resource'
 import { put, call, select } from 'redux-saga/effects'
 import axios from 'axios'
 
-const DOMAIN = 'http://localhost:5000'
+import { DOMAIN } from '../../globals/constants'
 
 export function* getUsers(request) {
   const { username, authToken } = request.args
