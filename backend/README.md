@@ -4,24 +4,17 @@
 
 ## Struktur
 - `api/`: Flask Server Api (Backend)
+- `.flaskenv`: Datei, die die Konfiguration (entry point und environment) für Flask enthält
 - `main.py`: "Entry Point" des Servers
+- `requirements.txt`: Auflistung aller Dependencies, um diese automatisch installieren zu können (siehe 4. unten)
 
 # Anleitung
 
 1. Python 3 [hier](https://www.python.org/downloads/) herunterladen
 2. In diesem Ordner virtuelle Umgebung einrichten mit `python -m venv venv`
-3. Virtuelle Umgebung starten:
-Unter Windows: `venv\Scripts\activate`
-Unter Linux: `source venv/bin/activate`
+3. Virtuelle Umgebung starten:  
+Windows: `venv\Scripts\activate`  
+Linux: `source venv/bin/activate`  
 Jetzt sollte an jedem Zeilenanfang im Terminal `(venv)` stehen.
-4. Flask herunterladen: `pip install flask`
-5. Mit Flask ausführen:
-Unter Windows:
-`set FLASK_APP=main.py`
-`flask run`
-
-Unter Linux:
-`export FLASK_APP=main.py`
-`flask run`
-
-6. optional: Mit `python-dotenv` (`pip install python-dotenv`) sollte die `.flaskenv`-Datei erkannt werden. Dann ist `FLASK_APP=main.py` nicht mehr nötig.
+4. Dependencies installieren: `pip install -r requirements.txt`
+5. Mit Flask ausführen: `flask run`
