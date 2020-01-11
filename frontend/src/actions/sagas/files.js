@@ -56,7 +56,7 @@ export function* getFiles(request) {
       }
     })
   } catch (err) {
-    const status = (error.response || {}).status
+    const status = (err.response || {}).status
     yield put({
       type: actionTypes.READ_RESOURCES_FAILED,
       resourceType: 'files',
@@ -125,7 +125,7 @@ export function* postFile(request) {
       }
     })
   } catch (err) {
-    const status = (error.response || {}).status
+    const status = (err.response || {}).status
     yield put({
       type: actionTypes.CREATE_RESOURCES_FAILED,
       resourceType: 'files',
@@ -170,7 +170,7 @@ export function* deleteFile(request) {
       }
     })
   } catch (err) {
-    const status = (error.response || {}).status
+    const status = (err.response || {}).status
     yield put({
       type: actionTypes.DELETE_RESOURCES_FAILED,
       resourceType: 'files',
