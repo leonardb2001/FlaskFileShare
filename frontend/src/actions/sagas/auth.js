@@ -13,8 +13,8 @@ export default function* authToken(request) {
       DOMAIN + '/test/auth_token',
       {
         auth: {
-          username,
-          password
+          username: btoa(unescape(encodeURIComponent(username))),
+          password: btoa(unescape(encodeURIComponent(password)))
         }
       }
     )

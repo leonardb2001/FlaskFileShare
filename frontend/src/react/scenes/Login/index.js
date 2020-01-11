@@ -140,7 +140,7 @@ class Login extends React.Component {
         <h3>Wrong Credentials</h3>
       }
       { status.failed && statusCode === null &&
-        <h3>Bad Internet Connection</h3>
+        <h3>Internal Server Error</h3>
       }
       { status.pending &&
         <Loader/>
