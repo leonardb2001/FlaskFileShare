@@ -8,7 +8,6 @@ import { DOMAIN } from '../../globals/constants'
 
 export default function* authToken(request) {
   const { username, password } = request.args
-  console.log(username, password)
   try {
     let response = yield call(axios.get,
       DOMAIN + '/test/auth_token',
