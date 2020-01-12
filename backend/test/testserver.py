@@ -1,9 +1,9 @@
 
-from api import app
+from test import app
+from test import testdata
 from flask import request, abort, jsonify
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 
-from api import testdata
 
 login = HTTPBasicAuth()
 auth = HTTPTokenAuth(scheme='Bearer')
