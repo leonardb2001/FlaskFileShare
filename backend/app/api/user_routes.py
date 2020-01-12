@@ -2,7 +2,6 @@
 from app import app
 from app.database import db
 
-@app.route('/')
-def index():
-    db.test()
-    return 'hello world'
+@app.route('/test1')
+def test1():
+    return 'test1'
