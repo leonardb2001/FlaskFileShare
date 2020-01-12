@@ -23,7 +23,6 @@ class Database:
             )
         ''')
         self.conn.commit()
-    
 
     def addUser(self, user):
         # This method will take a json string and create a database entry for a new user
@@ -51,3 +50,6 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute('SELECT * FROM files WHERE id = ?', fileid)
         return self.cursor.fetchall()
+    
+    def __del__(self):
+        self.conn.close()
