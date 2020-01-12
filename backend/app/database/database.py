@@ -6,16 +6,18 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS files (
-            id TEXT PRIMARY KEY,
-            path TEXT NOT NULL,
+            uuid TEXT PRIMARY KEY,
             name TEXT NOT NULL,
-            uid TEXT NOT NULL,
-            date INTEGER NOT NULL
+            path TEXT NOT NULL,
+            type TEXT NOT NULL,
+            children TEXT NOT NULL,
+            date INTEGER NOT NULL,
+            owner TEXT NOT NULL
             );
         ''')
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS users (
-            uid TEXT PRIMARY KEY,
+            uuid TEXT PRIMARY KEY,
             uname TEXT NOT NULL,
             email TEXT NOT NULL UNIQUE,
             pw_hash TEXT NOT NULL,
