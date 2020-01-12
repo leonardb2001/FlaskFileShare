@@ -45,7 +45,6 @@ def unauthorized():
 
 @login.verify_password
 def verify_password(username, password):
-    print(username, password)
     if username == 'tommy' and password == 'password123':
         return True
     return False
