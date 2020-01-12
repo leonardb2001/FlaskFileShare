@@ -8,13 +8,14 @@ import { DOMAIN } from '../../globals/constants'
 
 export default function* authToken(request) {
   const { username, password } = request.args
+  console.log(username, password)
   try {
     let response = yield call(axios.get,
       DOMAIN + '/test/auth_token',
       {
         auth: {
-          username: btoa(unescape(encodeURIComponent(username))),
-          password: btoa(unescape(encodeURIComponent(password)))
+          username: unescape(encodeURIComponent(username)), // btoa(unescape(encodeURIComponent(username))), // https://github.com/axios/axios/issues/1446
+          password: unescape(encodeURIComponent(password)) //btoa(unescape(encodeURIComponent(password))) // https://github.com/axios/axios/issues/1446
         }
       }
     )
