@@ -4,7 +4,7 @@ from app.database.database import Database
 from app.model import User
 
 class DatabaseTest(unittest.Testcase):
-    def __init__(self):
+    def setUp(self):
         self.db = Database('ffs_test.db')
 
     def testAddGetUser(self):
@@ -14,5 +14,7 @@ class DatabaseTest(unittest.Testcase):
         user2 = self.db.getUser(uuid)
         self.assertEqual(user1, user2)
 
+def run():
+    unittest.main()
 
 
