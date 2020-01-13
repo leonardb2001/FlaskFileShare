@@ -15,12 +15,34 @@ class File:
         return cls(uuid, name, path, type, children, date, owner)
 
     @classmethod
+    def fromDict(cls, d):
+        uuid = d['uuid']
+        name = d['name']
+        path = d['path']
+        type = d['type']
+        children = d['children']
+        date = d['date']
+        owner = d['owner']
+        return cls(uuid, name, path, type, children, date, owner)
+
+    @classmethod
     def fromJSON(cls, j):
         pass
 
     def toTuple(self):
         return (self.uuid, self.name, self.path, self.type,
                 self.children, self.date, self.owner)
+
+    def toDict(self):
+        return {
+            'uuid': self.uuid,
+            'name': self.name,
+            'path': self.name,
+            'type': self.type,
+            'children': self.children,
+            'date': self.date,
+            'owner': self.owner
+        }
 
     def toJSON(self):
         pass

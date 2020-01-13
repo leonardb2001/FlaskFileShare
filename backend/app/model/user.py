@@ -19,7 +19,7 @@ class User:
         email = d['email']
         pw_hash = d['pw_hash']
         date = d['date']
-        return User(uuid, unem, email, pw_hash, date)
+        return cls(uuid, uname, email, pw_hash, date)
 
     @classmethod
     def fromJSON(cls, j):
