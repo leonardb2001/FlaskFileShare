@@ -23,7 +23,7 @@ class User:
 
     @classmethod
     def fromJSON(cls, j):
-        pass
+        return User.fromDict(json.loads(j))
 
     def toTuple(self):
         return self.uuid, self.uname, self.email, self.pw_hash, self.date
@@ -38,7 +38,7 @@ class User:
         }
     
     def toJSON(self):
-        pass
+        return json.dumps(self.toDict())
 
     def __eq__(self, other):
         return (
