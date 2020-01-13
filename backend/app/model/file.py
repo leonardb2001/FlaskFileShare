@@ -24,3 +24,14 @@ class File:
 
     def toJSON(self):
         pass
+
+    def __eq__(self, other):
+        return (
+            self.uuid == other.uuid and
+            self.name == other.name and
+            self.path == other.path and
+            self.type == other.type and
+            self.children == other.children and
+            self.date == other.date and
+            self.owner == other.owner
+        )
