@@ -19,8 +19,8 @@ class File:
         pass
 
     def toTuple(self):
-        return self.uuid, self.name, self.path, self.type,
-               self.children, self.date, self.owner
+        return (self.uuid, self.name, self.path, self.type,
+                self.children, self.date, self.owner)
 
     def toJSON(self):
         pass

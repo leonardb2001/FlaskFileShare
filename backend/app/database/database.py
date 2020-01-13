@@ -1,7 +1,7 @@
 
 import sqlite3
-from app.database.model.user import User
-from app.database.model.file import File
+from app.model.user import User
+from app.model.file import File
 
 class Database:
     def __init__(self, source):
