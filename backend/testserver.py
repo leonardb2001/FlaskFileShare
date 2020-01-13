@@ -1,3 +1,3 @@
-from test import app
+from testserver import app
 
 app.run(debug=True)
