@@ -13,11 +13,29 @@ class User:
         return cls(uuid, uname, email, pw_hash, date)
 
     @classmethod
+    def fromDict(cls, d):
+        uuid = d['uuid']
+        uname = d['uname']
+        email = d['email']
+        pw_hash = d['pw_hash']
+        date = d['date']
+        return User(uuid, unem, email, pw_hash, date)
+
+    @classmethod
     def fromJSON(cls, j):
         pass
 
     def toTuple(self):
         return self.uuid, self.uname, self.email, self.pw_hash, self.date
+
+    def toDict(self):
+        return {
+            'uuid': self.uuid,
+            'uname': self.uname,
+            'email': self.email,
+            'pw_hash': self.pw_hash,
+            'date': self.date
+        }
     
     def toJSON(self):
         pass
