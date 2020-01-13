@@ -30,3 +30,7 @@ class User:
             self.pw_hash == other.pw_hash and
             self.date == other.date
         )
+
+    def __repr__(self):
+        return 'User(uuid={}, uname={}, email={}, pw_hash={}, date={}); ' \
+            .format(self.uuid, self.uname, self.email, self.pw_hash, self.date)
