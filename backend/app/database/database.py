@@ -39,7 +39,7 @@ class Database:
 
         cursor = self.conn.cursor()
         cursor.execute('SELECT * FROM users WHERE uuid = ?', userid)
-        return cursor.fetchall()
+        return cursor.fetchall() # TODO: map array entries to user object with map and User.fromTuple(...)
 
     def deleteUser(self, userid):
         cursor = self.conn.cursor()
@@ -51,14 +51,14 @@ class Database:
 
         cursor = self.conn.cursor()
         cursor.execute('SELECT * FROM files WHERE owner = ?', userid)
-        return cursor.fetchall()
+        return cursor.fetchall() # TODO: map array entries to file object with map and File.fromTuple(...)
 
     def getFile(self, fileid):
         # Takes the id of an existing file as an argument and returns all database columns of it
 
         cursor = self.conn.cursor()
         cursor.execute('SELECT * FROM files WHERE uuid = ?', fileid)
-        return self.cursor.fetchall()
+        return self.cursor.fetchall() # TODO: map array entries to file object with map and File.fromTuple(...)
 
     def addFile(self, file):
         cursor = self.conn.cursor()
