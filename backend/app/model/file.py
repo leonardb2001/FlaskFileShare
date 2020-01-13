@@ -35,3 +35,8 @@ class File:
             self.date == other.date and
             self.owner == other.owner
         )
+
+    def __repr__(self):
+        return 'File(uuid={}, name={}, path={}, type={}, children={}, date={}, owner={}); ' \
+            .format(self.uuid, self.name, self.path, self.type,
+                    self.children, self.date, self.owner)
