@@ -11,16 +11,6 @@ class DatabaseTest(unittest.TestCase):
     def setUp(self):
         self.db = Database(file, force=True)
 
-    def testAddUser(self):
-        user = User(
-             '1',
-             'user1',
-             'user1@email.com',
-             'oawornv0awe9fh9efhn9en',
-             1578950353
-        )
-        self.db.addUser(user)
-
     def testAddGetUser(self):
         uuid = '2'
         user1 = User(
