@@ -1,3 +1,4 @@
+import json
 
 class File:
     def __init__(self, uuid, name, path, type, children, date, owner):
@@ -27,7 +28,7 @@ class File:
 
     @classmethod
     def fromJSON(cls, j):
-        pass
+        return File.fromDict(json.loads(j))
 
     def toTuple(self):
         return (self.uuid, self.name, self.path, self.type,
@@ -45,7 +46,7 @@ class File:
         }
 
     def toJSON(self):
-        pass
+        return json.dumps(self.toDict())
 
     def __eq__(self, other):
         return (
