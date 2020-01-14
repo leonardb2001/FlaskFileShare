@@ -1,6 +1,6 @@
 
-from test import app
-from test import testdata
+from testserver import app
+from testserver import testdata
 from flask import request, abort, jsonify
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 

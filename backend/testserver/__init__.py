@@ -5,4 +5,4 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-from test import testserver
+from testserver import testserver
