@@ -16,7 +16,7 @@ class Database:
             name TEXT NOT NULL,
             path TEXT NOT NULL,
             type TEXT NOT NULL,
-            parent_folder TEXT NOT NULL,
+            parent TEXT NOT NULL,
             date INTEGER NOT NULL,
             owner TEXT NOT NULL
             );
@@ -62,6 +62,12 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute('SELECT * FROM files WHERE uuid = ?', (fileid,))
         return File.fromDBTuple(cursor.fetchone())
+
+    def getAllDirectoryChildren(self,dirid):
+        #takes a folders id and returns all it's children
+        cursor = self.conn.cursor()
+        cursor.execute('SELECT * FROM files WHERE parent = ?', (dirid,))
+        return list(map(lambda f: File.fromDBTuple(f), cursor.fetchall()))
 
     def addFile(self, file):
         cursor = self.conn.cursor()
