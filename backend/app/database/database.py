@@ -34,7 +34,7 @@ class Database:
 
     def addUser(self, user):
         cursor = self.conn.cursor()
-        cursor.execute('INSERT INTO users VALUES (?, ?, ?, ?, ?)', user.toTuple())
+        cursor.execute('INSERT INTO users VALUES (?, ?, ?, ?, ?)', user.toDBTuple())
         self.conn.commit()
 
     def getUser(self, userid):
@@ -68,12 +68,9 @@ class Database:
 
     def addFile(self, file):
         cursor = self.conn.cursor()
-        cursor.execute('INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?)', file.toTuple())
+        cursor.execute('INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?)', file.toDBTuple())
         self.conn.commit()
 
     def deleteFile(self, fileid):
         cursor = self.conn.cursor()
         cursor.execute('DELETE FROM files WHERE uuid = ?', (fileid,))
-    
-    def __del__(self):
-        self.conn.close()

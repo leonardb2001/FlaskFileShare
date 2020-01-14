@@ -30,9 +30,9 @@ class File:
     def fromJSON(cls, j):
         return File.fromDict(json.loads(j))
 
-    def toTuple(self):
+    def toDBTuple(self):
         return (self.uuid, self.name, self.path, self.type,
-                self.children, self.date, self.owner)
+                json.dumps(self.children), self.date, self.owner)
 
     def toDict(self):
         return {

@@ -1,4 +1,6 @@
 
+import json
+
 class User:
     def __init__(self, uuid, uname, email, pw_hash, date):
         self.uuid = uuid
@@ -25,7 +27,7 @@ class User:
     def fromJSON(cls, j):
         return User.fromDict(json.loads(j))
 
-    def toTuple(self):
+    def toDBTuple(self):
         return self.uuid, self.uname, self.email, self.pw_hash, self.date
 
     def toDict(self):
