@@ -11,9 +11,10 @@ class File:
         self.owner = owner
 
     @classmethod
-    def fromTuple(cls, t):
+    def fromDBTuple(cls, t):
         uuid, name, path, type, children, date, owner = t
-        return cls(uuid, name, path, type, children, date, owner)
+        children_array = json.loads(children)
+        return cls(uuid, name, path, type, children_array, date, owner)
 
     @classmethod
     def fromDict(cls, d):

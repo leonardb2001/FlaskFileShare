@@ -44,7 +44,7 @@ class Database:
         cursor.execute('SELECT * FROM users WHERE uuid = ?', (userid,))
         result = cursor.fetchone()
         if result is not None:
-            return User.fromTuple(result)
+            return User.fromDBTuple(result)
         return None
 
     def deleteUser(self, userid):
@@ -57,14 +57,14 @@ class Database:
 
         cursor = self.conn.cursor()
         cursor.execute('SELECT * FROM files WHERE owner = ?', userid)
-        return cursor.fetchall() # TODO: map array entries to file object with map and File.fromTuple(...)
+        return cursor.fetchall() # TODO: map array entries to file object with map and File.fromDBTuple(...)
 
     def getFile(self, fileid):
         # Takes the id of an existing file as an argument and returns all database columns of it
 
         cursor = self.conn.cursor()
         cursor.execute('SELECT * FROM files WHERE uuid = ?', (fileid,))
-        return File.fromTuple(self.cursor.fetchone())
+        return File.fromDBTuple(self.cursor.fetchone())
 
     def addFile(self, file):
         cursor = self.conn.cursor()

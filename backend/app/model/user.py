@@ -10,7 +10,7 @@ class User:
         self.date = date
 
     @classmethod
-    def fromTuple(cls, t):
+    def fromDBTuple(cls, t):
         uuid, uname, email, pw_hash, date = t
         return cls(uuid, uname, email, pw_hash, date)
 
