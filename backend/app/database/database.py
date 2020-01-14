@@ -86,7 +86,7 @@ class Database:
 
     def deleteFolder(self, folderid):
         cursor = self.conn.cursor()
-        cursor.execute('SELECT FROM files WHERE parent = ?', (userid,))
+        cursor.execute('SELECT FROM files WHERE parent = ?', (folderid,))
         to_delete = cursor.fetchall()
         self.conn.commit()
         for file in to_delete:
@@ -95,3 +95,4 @@ class Database:
             else:
                 self.deleteFolder(file[0])
                 self.deleteFile(file[0])
+        self.deleteFile(folderid)
