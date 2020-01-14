@@ -93,4 +93,4 @@ class Database:
                 self.deleteSingleComponent(file[0])
             else:
                 self.deleteFolder(file[0])
-                self.deleteSingleComponent(file[0])
+        self.deleteSingleComponent(file[0])
