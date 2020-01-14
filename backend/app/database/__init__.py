@@ -32,5 +32,3 @@ for u in exampleUsers:
 
 for f in exampleFiles:
     db.addFile(f)
-
-print(db.getFile(dir_id))
