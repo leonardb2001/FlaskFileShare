@@ -77,7 +77,21 @@ class Database:
     def deleteFile(self, fileid):
         cursor = self.conn.cursor()
         cursor.execute('DELETE FROM files WHERE uuid = ?', (fileid,))
+        self.conn.commit()
 
     def deleteUser(self, userid):
         cursor = self.conn.cursor()
         cursor.execute('DELETE FROM files WHERE uuid = ?', (userid,))
+        self.conn.commit()
+
+    def deleteFolder(self, folderid):
+        cursor = self.conn.cursor()
+        cursor.execute('SELECT FROM files WHERE parent = ?', (userid,))
+        to_delete = cursor.fetchall()
+        self.conn.commit()
+        for file in to_delete:
+            if file[3] == 'f':
+                self.deleteFile(file[0])
+            else:
+                self.deleteFolder(file[0])
+                self.deleteFile(file[0])
