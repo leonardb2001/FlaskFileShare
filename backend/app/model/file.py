@@ -1,4 +1,5 @@
 import json
+import uuid
 
 class File:
     def __init__(self, uuid, name, path, type, children, date, owner):
@@ -64,3 +65,7 @@ class File:
         return 'File(uuid={}, name={}, path={}, type={}, children={}, date={}, owner={}); ' \
             .format(self.uuid, self.name, self.path, self.type,
                     self.children, self.date, self.owner)
+
+
+def generateFileUUID():
+    return str(uuid.uuid4())

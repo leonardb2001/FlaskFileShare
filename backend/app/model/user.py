@@ -1,5 +1,6 @@
 
 import json
+import uuid
 
 class User:
     def __init__(self, uuid, uname, email, pw_hash, date):
@@ -54,3 +55,7 @@ class User:
     def __repr__(self):
         return 'User(uuid={}, uname={}, email={}, pw_hash={}, date={}); ' \
             .format(self.uuid, self.uname, self.email, self.pw_hash, self.date)
+
+
+def generateUserUUID():
+    return str(uuid.uuid4())
