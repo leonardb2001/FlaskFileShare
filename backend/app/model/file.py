@@ -14,7 +14,6 @@ class File:
     @classmethod
     def fromDBTuple(cls, t):
         uuid, name, path, type, parent, date, owner = t
-        #children_array = json.loads(children)
         return cls(uuid, name, path, type, parent, date, owner)
 
     @classmethod
