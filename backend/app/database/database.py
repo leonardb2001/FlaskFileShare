@@ -16,7 +16,7 @@ class Database:
             name TEXT NOT NULL,
             path TEXT NOT NULL,
             type TEXT NOT NULL,
-            children TEXT NOT NULL,
+            parent_folder TEXT NOT NULL,
             date INTEGER NOT NULL,
             owner TEXT NOT NULL
             );
@@ -61,7 +61,7 @@ class Database:
         # Takes the id of an existing file as an argument and returns all database columns of it
         cursor = self.conn.cursor()
         cursor.execute('SELECT * FROM files WHERE uuid = ?', (fileid,))
-        return File.fromDBTuple(self.cursor.fetchone())
+        return File.fromDBTuple(cursor.fetchone())
 
     def addFile(self, file):
         cursor = self.conn.cursor()

@@ -15,14 +15,16 @@ exampleUsers = [
     User(generateUserUUID(), 'user9', 'user9@gmail.com', 'abcdefg', 1578959729)
 ]
 
+dir_id = generateFileUUID()
+
 exampleFiles = [
-    File(generateFileUUID(), 'file1', '', 'f', [], 1578959729, exampleUsers[0].uuid),
-    File(generateFileUUID(), 'dir1', '', 'd', [3, 4], 1578959729, exampleUsers[0].uuid),
-    File(generateFileUUID(), 'file2', 'dir1/', 'f', [], 1578959729, exampleUsers[0].uuid),
-    File(generateFileUUID(), 'file3', 'dir1/', 'f', [], 1578959729, exampleUsers[0].uuid),
-    File(generateFileUUID(), 'file4', '', 'f', [], 1578959729, exampleUsers[1].uuid),
-    File(generateFileUUID(), 'file5', '', 'f', [], 1578959729, exampleUsers[1].uuid),
-    File(generateFileUUID(), 'file6', '', 'f', [], 1578959729, exampleUsers[1].uuid)
+    File(generateFileUUID(), 'file1', '', 'f', '', 1578959729, exampleUsers[0].uuid),
+    File(dir_id, 'dir1', '', 'd', '', 1578959729, exampleUsers[0].uuid),
+    File(generateFileUUID(), 'file2', 'dir1/', 'f', dir_id, 1578959729, exampleUsers[0].uuid),
+    File(generateFileUUID(), 'file3', 'dir1/', 'f', dir_id, 1578959729, exampleUsers[0].uuid),
+    File(generateFileUUID(), 'file4', '', 'f', '', 1578959729, exampleUsers[1].uuid),
+    File(generateFileUUID(), 'file5', '', 'f', '', 1578959729, exampleUsers[1].uuid),
+    File(generateFileUUID(), 'file6', '', 'f', '', 1578959729, exampleUsers[1].uuid)
 ]
 
 for u in exampleUsers:
@@ -30,3 +32,5 @@ for u in exampleUsers:
 
 for f in exampleFiles:
     db.addFile(f)
+
+print(db.getFile(dir_id))
