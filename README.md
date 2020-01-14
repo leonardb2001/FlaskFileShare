@@ -24,5 +24,3 @@ Das Ziel ist es, auf dem `master` Branch nur "sauberen", funktionierenden Code z
 ## Branches
 - __`master`__: Branch für funktionierenden Code (nicht anfassen!)
 - `maintenance`: Branch für Änderungen an READMEs, Schreibfehler fixes, Verwaltungsstuff, ...
-- `database`: Branch von Leonard mit Funktionen zur Datenbank (im Backend)
-- `connection_backend_frontend`: Branch von Oliver mit dem Versuch, eine echte Verbindung zwischen Frontend und Backend aufzubauen
