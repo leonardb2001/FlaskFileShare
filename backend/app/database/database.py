@@ -88,7 +88,6 @@ class Database:
         cursor = self.conn.cursor()
         cursor.execute('SELECT id,type FROM files WHERE parent = ?', (folderid,))
         to_delete = cursor.fetchall()
-        self.conn.commit()
         if len(to_delete) > 0:
             for file in to_delete:
                 if file[1] == 'f':
@@ -96,6 +95,3 @@ class Database:
                 else:
                     self.deleteFolder(file[0])
                     self.deleteFile(file[0])
-        else:
-            pass
-        self.deleteFile(folderid)
