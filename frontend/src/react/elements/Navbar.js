@@ -28,16 +28,16 @@ class Navbar extends React.Component {
       <>
         <AppBar position='static'>
           <Toolbar className={classes.toolbar}>
-            <Button variant='contained' className={classes.light} component={Link} to='/'>home</Button>
+            <Button size='small' variant='contained' className={classes.light} component={Link} to='/'>home</Button>
             { isAuthenticated &&
-            <ButtonGroup variant='contained' color='primary'>
+            <ButtonGroup size='small' variant='contained' color='primary'>
               <Button className={classes.light} component={Link} to='/users/tommy'>example user</Button>
               <Button className={classes.light} component={Link} to='/user-search/test'>search</Button>
               <Button className={classes.light} component={Link} to='/logout'>logout</Button>
             </ButtonGroup>
             }
             { !isAuthenticated &&
-            <ButtonGroup variant='contained'>
+            <ButtonGroup size='small' variant='contained'>
               <Button className={classes.light} component={Link} to='/login'>login</Button>
               <Button className={classes.light} component={Link} to='/register'>register</Button>
             </ButtonGroup>
