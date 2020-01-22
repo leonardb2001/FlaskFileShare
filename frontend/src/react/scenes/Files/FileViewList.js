@@ -11,6 +11,8 @@ import {
   withStyles
 } from '@material-ui/core'
 
+import { FolderIcon, FileIcon } from 'react/icons/functions'
+
 const styles = {}
 
 class FileViewList extends React.Component {
@@ -22,12 +24,14 @@ class FileViewList extends React.Component {
           if (f.type === 'f') {
             return (
               <ListItem button key={f.id}>
+                <ListItemIcon><FileIcon/></ListItemIcon>
                 <ListItemText primary={f.name}/>
               </ListItem>
             )
           } else {
             return (
               <ListItem button key={f.id}>
+                <ListItemIcon><FolderIcon/></ListItemIcon>
                 <ListItemText primary={f.name}/>
               </ListItem>
             )
