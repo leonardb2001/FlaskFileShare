@@ -45,7 +45,7 @@ class Files extends React.Component {
           <Loader/>
         }
         { status.succeeded &&
-          <FileViewList list={REQUEST_KEY} path='/'/>
+          <FileViewList list={REQUEST_KEY} path=''/>
         }
         { status.failed &&
           <h1>failed</h1>

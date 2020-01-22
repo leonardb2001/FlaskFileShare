@@ -27,32 +27,14 @@ export function* getFiles(request) {
         }
       }
     )
-    const resources = response.data
-    let fileChildrenLists = {}
-    for (const resource of resources) {
-      if (resource.type === 'd') {
-        fileChildrenLists[resource.id] = resource.children
-        delete resource.children
-      }
-    }
-    const userFileIds = resources.map(f => f.id)
     yield put({
       type: actionTypes.READ_RESOURCES_SUCCEEDED,
       resourceType: 'files',
       requestKey: request.requestKey,
-      resources: resources,
+      resources: response.data,
       list: request.list,
       requestProperties: {
         statusCode: response.status
-      }
-    })
-    yield put({
-      type: actionTypes.UPDATE_RESOURCES,
-      lists: {
-        files: {
-          ...fileChildrenLists,
-          [userid]: userFileIds
-        }
       }
     })
   } catch (err) {
@@ -92,38 +74,17 @@ export function* postFile(request) {
         }
       }
     )
-    console.log(res)
-    const id = res.data.id
-    const newResource = {
-      id,
-      name: filename,
-      path,
-      type
-    }
     yield put({
       type: actionTypes.CREATE_RESOURCES_SUCCEEDED,
       resourceType: 'files',
       requestKey: request.requestKey,
-      resources: [newResource],
+      resources: [],
       list: request.list,
       requestProperties: {
         statusCode: res.status
       }
     })
-    yield put({
-      type: EXTEND_FILE_LIST,
-      payload: {
-        listkey: parentid,
-        files: [id]
-      }
-    })
-    yield put({
-      type: EXTEND_FILE_LIST,
-      payload: {
-        listkey: userid,
-        files: [id]
-      }
-    })
+    // TODO: fetch new files from server
   } catch (err) {
     const status = (err.response || {}).status
     yield put({
@@ -153,7 +114,7 @@ export function* deleteFile(request) {
           'Authorization': 'bearer ' + authToken
         }
       }
-  )
+    )
     yield put({
       type: actionTypes.DELETE_RESOURCES_SUCCEEDED,
       resourceType: 'files',
@@ -161,12 +122,6 @@ export function* deleteFile(request) {
       resources: [fileid],
       requestProperties: {
         statusCode: res.status
-      }
-    })
-    yield put({
-      type: DELETE_FOLDER_RECURSIVELY,
-      payload: {
-        id: fileid
       }
     })
   } catch (err) {
@@ -180,31 +135,4 @@ export function* deleteFile(request) {
       }
     })
   }
-}
-
-
-export function* deleteFolderRecursively(request) {
-  const { id } = request.payload
-  // if id is folder:
-  //    get the fileids
-  //    for each file id dispatch DELETE_FOLDER_RECUSIVELY
-  // dispatch DELETE_RESOURCES for the id
-  const children = yield select(state => getResources(state.files, id))
-  if (children) {
-    for (const c of children) {
-      yield put({
-        type: DELETE_FOLDER_RECURSIVELY,
-        payload: {
-          id: c.id
-        }
-      })
-    }
-  }
-  yield put({
-    type: actionTypes.DELETE_RESOURCES,
-    resources: {
-      files: [id]
-    }
-  })
-
 }

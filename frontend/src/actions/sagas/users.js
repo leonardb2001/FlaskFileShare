@@ -106,15 +106,6 @@ export function* deleteUser(request) {
         statusCode: res.status
       }
     })
-    const userFiles = yield select(state => state.files.lists[userid])
-    if (userFiles) {
-      yield put({
-        type: actionTypes.DELETE_RESOURCES,
-        resources: {
-          files: userFiles
-        }
-      })
-    }
   } catch (err) {
     const status = (err.response || {}).status
     yield put({
