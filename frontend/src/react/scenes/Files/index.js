@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { getStatus, getResources } from 'redux-resource'
+import { getStatus } from 'redux-resource'
 import { connect } from 'react-redux'
 
 import {

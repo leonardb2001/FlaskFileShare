@@ -4,6 +4,10 @@ import { connect } from 'react-redux'
 import { getResources } from 'redux-resource'
 
 import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   withStyles
 } from '@material-ui/core'
 
@@ -13,12 +17,24 @@ class FileViewList extends React.Component {
   render() {
     const { classes, files } = this.props
     return (
-      <>
-        { files.map( f =>
-            <h3 key={f.id}>{f.name}</h3>
-          )
+      <List>
+        { files.map( f => {
+          if (f.type === 'f') {
+            return (
+              <ListItem button key={f.id}>
+                <ListItemText primary={f.name}/>
+              </ListItem>
+            )
+          } else {
+            return (
+              <ListItem button key={f.id}>
+                <ListItemText primary={f.name}/>
+              </ListItem>
+            )
+          }
+          })
         }
-      </>
+      </List>
     )
   }
 }
