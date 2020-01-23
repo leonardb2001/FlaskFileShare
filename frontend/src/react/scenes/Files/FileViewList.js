@@ -30,7 +30,8 @@ const styles = theme => ({
     borderWidth: '1px',
     borderColor: theme.palette.primary.dark,
     marginTop: '30px',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    textAlign: 'center'
   },
   navigation: {
     display: 'flex',
@@ -54,7 +55,6 @@ function parentFolderRoutes(path) {
       name: components[i]
     })
   }
-  console.log(result)
   return result
 }
 
@@ -107,6 +107,9 @@ class FileViewList extends React.Component {
                 )
               }
               })
+            }
+            { files.length === 0 &&
+              <h3>Hier gibt es keine Dateien.</h3>
             }
           </List>
         </Box>
