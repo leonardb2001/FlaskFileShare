@@ -7,15 +7,17 @@ import { Link } from 'react-router-dom'
 
 import {
   Box,
-  Button,
+  Breadcrumbs,
+  Link as MLink,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Typography,
   withStyles
 } from '@material-ui/core'
 
-import { FolderIcon, FileIcon, BackIcon } from 'react/icons/functions'
+import { FolderIcon, FileIcon } from 'react/icons/functions'
 
 const styles = theme => ({
   parent: {
@@ -34,36 +36,58 @@ const styles = theme => ({
     display: 'flex',
     backgroundColor: theme.palette.primary.dark
   },
-  back: {
-    marginRight: '10px'
+  breadcrumbs: {
+    margin: '10px'
   }
 })
 
-function ListItemLink(props) {
-  return <ListItem button component={Link} {...props} />;
+function parentFolderRoutes(path) {
+  const components = path.split('/').filter(r => r !== '')
+  let result = []
+  result.push({
+    route: '',
+    name: 'root'
+  })
+  for (let i = 0; i < components.length; i += 1) {
+    result.push({
+      route: components.slice(0, i + 1).join('/'),
+      name: components[i]
+    })
+  }
+  console.log(result)
+  return result
 }
+
 
 class FileViewList extends React.Component {
   render() {
     const { classes, files, match } = this.props
     const folder = match.params.folder || ''
     const url = match.url.replace(/\/$/g, '') // remove trailing "/" in url
-    const backPath = url.substring(0, url.lastIndexOf('/')) // remove last component of path
+    const folderPaths = parentFolderRoutes(folder)
     return (
       <Box className={classes.parent}>
         <Box className={classes.wrapper}>
           <Box className={classes.navigation}>
-            { folder != '' &&
-              <Button
-                className={classes.back}
-                component={Link}
-                to={backPath}
-                startIcon={<BackIcon/>}
-              >
-                back
-              </Button>
-            }
-            <h3>{folder}</h3>
+            <Breadcrumbs
+              separator={<Typography color='primary'>/</Typography>}
+              className={classes.breadcrumbs}
+            >
+              { 
+                folderPaths.map(r => {
+                  if (r.route !== folder) {
+                    return (
+                      <MLink
+                        component={Link}
+                        to={'/users/' + match.params.username + '/' + r.route}
+                        key={r.route}
+                      ><b>{r.name}</b></MLink>
+                    )
+                  }
+                  return <Typography color='primary' key={r.route}><b>{r.name}</b></Typography>
+                })
+              }
+            </Breadcrumbs>
           </Box>
           <List>
             { files.map( f => {
@@ -76,10 +100,10 @@ class FileViewList extends React.Component {
                 )
               } else {
                 return (
-                  <ListItemLink to={url + '/' + f.name} key={f.id}>
+                  <ListItem button component={Link} to={url + '/' + f.name} key={f.id}>
                     <ListItemIcon><FolderIcon/></ListItemIcon>
                     <ListItemText primary={f.name}/>
-                  </ListItemLink>
+                  </ListItem>
                 )
               }
               })

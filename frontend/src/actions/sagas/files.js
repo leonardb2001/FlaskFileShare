@@ -1,9 +1,7 @@
 
-import { actionTypes, getResources } from 'redux-resource'
-import { put, call, select } from 'redux-saga/effects'
+import { actionTypes } from 'redux-resource'
+import { put, call } from 'redux-saga/effects'
 import axios from 'axios'
-
-import { EXTEND_FILE_LIST, DELETE_FOLDER_RECURSIVELY } from '../../globals/actionTypes'
 
 import { DOMAIN } from '../../globals/constants'
 

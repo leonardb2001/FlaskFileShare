@@ -1,6 +1,6 @@
 
 import { actionTypes } from 'redux-resource'
-import { put, call, select } from 'redux-saga/effects'
+import { put, call } from 'redux-saga/effects'
 import axios from 'axios'
 
 import { DOMAIN } from '../../globals/constants'

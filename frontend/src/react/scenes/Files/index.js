@@ -40,7 +40,7 @@ class Files extends React.Component {
   }
 
   render() {
-    const { status, classes, match } = this.props
+    const { status, classes } = this.props
     return (
       <Box className={classes.filesWrapper}>
         { status.pending &&

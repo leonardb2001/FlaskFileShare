@@ -3,7 +3,7 @@ import { takeEvery } from 'redux-saga/effects'
 import { actionTypes } from 'redux-resource'
 
 import { getUsers, postUser, deleteUser } from './users'
-import { getFiles, postFile, deleteFile, deleteFolderRecursively } from './files'
+import { getFiles, postFile, deleteFile } from './files'
 import authTokenSaga from './auth'
 import { READ_AUTH_TOKEN_PENDING } from '../../globals/actionTypes'
 
