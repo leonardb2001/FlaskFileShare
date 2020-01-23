@@ -66,6 +66,7 @@ class Login extends React.Component {
   }
 
   login = (event) => {
+    console.log('login')
     event.preventDefault();
     const { login, password } = this.state
     this.props.dispatch(getAuthToken(login, password));
@@ -78,7 +79,7 @@ class Login extends React.Component {
       <Card square className={classes.card}>
         <p><i>Do not enter your real credentials! Right credentials: tommy password123</i></p>
         <CardActions>
-          <form className={classes.container}>
+          <form onSubmit={this.login} className={classes.container}>
             <TextField
               className={classes.loginElement}
               label='email or username'
@@ -113,9 +114,9 @@ class Login extends React.Component {
               variant='outlined'
             />
             <Button
+              type='submit'
               className={classes.loginElement}
               color='primary'
-              onClick={this.login}
               variant='contained'
             >
               login
