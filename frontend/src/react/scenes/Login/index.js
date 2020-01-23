@@ -132,7 +132,7 @@ class Login extends React.Component {
     if (isAuthenticated) {
       const redirect = (this.props.location.state || {}).redirect
       return (
-        <Redirect to={redirect || '/'} />
+        <Redirect to={redirect || '/users/tommy'} />
       )
     }
     return (
