@@ -59,6 +59,10 @@ def verify_token(token):
         return True
     return False
 
+@app.route(prefix)
+def test():
+    return 'success'
+
 # curl -i tommy:password123@localhost:5000/test/auth_token
 @app.route(prefix + '/auth_token')
 @login.login_required
