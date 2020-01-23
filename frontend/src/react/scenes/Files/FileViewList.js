@@ -26,7 +26,7 @@ const styles = theme => ({
   },
   wrapper: {
     border: 'solid',
-    borderRadius: '10px',
+    borderRadius: '15px',
     borderWidth: '1px',
     borderColor: theme.palette.primary.dark,
     marginTop: '30px',
