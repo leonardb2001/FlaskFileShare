@@ -2,6 +2,7 @@
 import React from 'react'
 import { getStatus } from 'redux-resource'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import {
   Box,
@@ -17,7 +18,8 @@ const REQUEST_KEY = '__currentFiles'
 const styles = {
   filesWrapper: {
     maxWidth: '1000px',
-    margin: '0 auto'
+    margin: '0 auto',
+    position: 'relative'
   }
 }
 
@@ -38,14 +40,14 @@ class Files extends React.Component {
   }
 
   render() {
-    const { status, classes } = this.props
+    const { status, classes, match } = this.props
     return (
       <Box className={classes.filesWrapper}>
         { status.pending &&
           <Loader/>
         }
         { status.succeeded &&
-          <FileViewList list={REQUEST_KEY} path=''/>
+          <FileViewList list={REQUEST_KEY}/>
         }
         { status.failed &&
           <h1>failed</h1>
@@ -65,4 +67,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Files))
+export default withStyles(styles)(connect(mapStateToProps)(withRouter(Files)))
