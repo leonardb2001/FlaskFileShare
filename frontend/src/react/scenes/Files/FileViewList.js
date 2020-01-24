@@ -5,6 +5,7 @@ import { getResources } from 'redux-resource'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
+import MaterialTable from 'material-table'
 import {
   Box,
   Breadcrumbs,
@@ -61,7 +62,7 @@ function parentFolderRoutes(path) {
 
 class FileViewList extends React.Component {
   render() {
-    const { classes, files, match } = this.props
+    const { history, classes, files, match } = this.props
     const folder = match.params.folder || ''
     const url = match.url.replace(/\/$/g, '') // remove trailing "/" in url
     const folderPaths = parentFolderRoutes(folder)
@@ -89,7 +90,36 @@ class FileViewList extends React.Component {
               }
             </Breadcrumbs>
           </Box>
-          <List>
+          <MaterialTable
+            title='Dateien'
+            columns={[
+              {
+                title: '',
+                render: f => {
+                  if (f.type === 'd') return <FolderIcon/>
+                  else return <FileIcon/>
+                },
+                  cellStyle: {
+                    width: '0'
+                  }
+              },
+              {
+                title: 'Name',
+                field: 'name'
+              },
+              {
+                title: 'Datum',
+                field: 'date'
+              }
+            ]}
+            data={files}
+            onRowClick={(event, f, toggle) => {
+              if (f.type === 'd') history.push(url + '/' + f.name)
+            }}
+          />
+
+
+          {/*<List>
             { files.map( f => {
               if (f.type === 'f') {
                 return (
@@ -111,7 +141,7 @@ class FileViewList extends React.Component {
             { files.length === 0 &&
               <h3>Hier gibt es keine Dateien.</h3>
             }
-          </List>
+          </List>*/}
         </Box>
       </Box>
     )
